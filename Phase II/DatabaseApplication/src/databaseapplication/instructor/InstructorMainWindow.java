@@ -5,12 +5,46 @@
  */
 package databaseapplication.instructor;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import javax.swing.JFrame;
+import javax.swing.JTable;
+
+import databaseapplication.CommonMethods;
 
 /**
  *
  * @author Ibrahim
+ * 
+ * @author ibra5_000
+ * @version v1.1
+ * 
  */
+
 public class InstructorMainWindow extends JFrame{
-    
+    /*
+     * assigning grade cutoffs (view , update , delete)
+     * assigning grading componenets (view , update , delete)
+     * assinging points (view , update , delete)
+     * view students in a section 
+     * 
+     */
+	private static Connection conn;	
+	public InstructorMainWindow() {
+
+		this.setSize(500, 500);		//TODO
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:derby://localhost:1527/AppDB","ibrahim","ibrahim");
+			//TODO keep this "jdbc:oracle:thin:@localhost:1521:xe"
+			JTable a = new CommonMethods().CreateTable(conn,"select fname,minit,lname,ssn from employee");
+			this.add(a);
+			this.setVisible(true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
