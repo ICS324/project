@@ -13,9 +13,11 @@ public class CommonMethods {
 		Statement s = conn.createStatement();
 		ResultSet r = s.executeQuery(query);
 		
-		while(r.next());
+		//while(r.next());//no need for this, just use r.last
+		r.last();
 		JTable a = new JTable(r.getRow()+1,r.getMetaData().getColumnCount());
-		r = s.executeQuery(query);
+		//r = s.executeQuery(query);//Also why you are executing the query again? no need to do that
+		r.first();
 		for(int i=0;i<a.getColumnCount();i++)//attributes
 			a.setValueAt(r.getMetaData().getColumnLabel(i+1), 0, i);
 		
