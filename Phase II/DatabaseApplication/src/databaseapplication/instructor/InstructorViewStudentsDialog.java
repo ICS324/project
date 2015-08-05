@@ -28,7 +28,7 @@ public class InstructorViewStudentsDialog extends JFrame{
 			add(f,BorderLayout.NORTH);
 			ScrollPane p = new ScrollPane();
 			t = cm.CreateTable(cm.getConnection(),
-					"select * from student where major_code = \'" + major.toUpperCase()+"\'");
+					"select * from enrollment,instructor where inid = \'" + major.toUpperCase()+"\'");
 			p.add(t);
 			add(p,BorderLayout.CENTER);
 
