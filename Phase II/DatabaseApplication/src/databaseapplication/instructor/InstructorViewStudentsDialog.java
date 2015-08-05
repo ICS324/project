@@ -17,7 +17,13 @@ public class InstructorViewStudentsDialog extends JFrame{
 	private JTable t;
 
 	InstructorViewStudentsDialog(){
-		String major = JOptionPane.showInputDialog("enter a major's name");
+		String var = "";
+		while(var.length()==0){
+			var = JOptionPane.showInputDialog("enter instructor's id");
+			if(var==null)
+				return;
+		}
+		
 		CommonMethods cm = new CommonMethods();
 		setLayout(new BorderLayout());
 		try {
@@ -28,7 +34,7 @@ public class InstructorViewStudentsDialog extends JFrame{
 			add(f,BorderLayout.NORTH);
 			ScrollPane p = new ScrollPane();
 			t = cm.CreateTable(cm.getConnection(),
-					"select * from enrollment,instructor where inid = \'" + major.toUpperCase()+"\'");
+					"select section.\"number\" as \"SECTION NUMBER\",student_id,concat(concat(first_name,' '),last_name) as name from section join enrollment on (section_refrence_number = refrence_number) join student on (student_id = id) where instructor_id = \'" + var+"\' order by \"number\",student_id");
 			p.add(t);
 			add(p,BorderLayout.CENTER);
 
