@@ -6,6 +6,7 @@ import java.awt.ScrollPane;
 import java.sql.SQLException;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -16,6 +17,7 @@ public class InstructorViewStudentsDialog extends JFrame{
 	private JTable t;
 
 	InstructorViewStudentsDialog(){
+		String major = JOptionPane.showInputDialog("enter a major's name");
 		CommonMethods cm = new CommonMethods();
 		setLayout(new BorderLayout());
 		try {
@@ -25,7 +27,8 @@ public class InstructorViewStudentsDialog extends JFrame{
 			f.setEditable(false);
 			add(f,BorderLayout.NORTH);
 			ScrollPane p = new ScrollPane();
-			t = cm.CreateTable(cm.getConnection(),"select * from major");
+			t = cm.CreateTable(cm.getConnection(),
+					"select * from student where major_code = \'" + major.toUpperCase()+"\'");
 			p.add(t);
 			add(p,BorderLayout.CENTER);
 
@@ -33,7 +36,7 @@ public class InstructorViewStudentsDialog extends JFrame{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		setSize((int) (t.getPreferredSize().width*1.25),t.getPreferredSize().height*2);
+		setSize((int) (t.getPreferredSize().width*1.25 +50 ),t.getPreferredSize().height*2 +50);
 		setVisible(true);
 	}
 	

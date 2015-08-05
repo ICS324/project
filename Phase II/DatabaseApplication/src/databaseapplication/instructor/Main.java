@@ -1,5 +1,6 @@
 package databaseapplication.instructor;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,18 +12,25 @@ public class Main {
 	public static void main(String[] args) {
 
 		JFrame f = new JFrame();
-		JButton b = new JButton("");
-		b.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new InstructorMainWindow();
-				
-			}
-		});
+		f.setBounds(400, 300, 400, 300);
+		f.setLayout(new GridLayout(4,3));
 		
-		f.add(b);
+		JButton vs = new JButton("View Students");
+		vs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new InstructorViewStudentsDialog();}});
+		
+		JButton as = new JButton("Assign Students");
+		as.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new InstructorViewStudentsDialog();}});
+		
+		f.add(vs);
+		f.add(as);
+
+		f.setDefaultCloseOperation(2);
 		f.setVisible(true);
+
 	}
 
 }

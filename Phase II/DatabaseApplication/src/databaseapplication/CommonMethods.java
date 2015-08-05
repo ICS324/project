@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class CommonMethods {
 	
@@ -30,7 +32,9 @@ public class CommonMethods {
 		
 		JTable a = new JTable(r.getRow()+1,r.getMetaData().getColumnCount());
 		a.setRowHeight(20);
-		
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+		a.setDefaultRenderer(String.class, centerRenderer);
 		r = s.executeQuery(query);
 		for(int i=0;i<a.getColumnCount();i++){//attributes
 			a.setValueAt(r.getMetaData().getColumnLabel(i+1), 0, i);

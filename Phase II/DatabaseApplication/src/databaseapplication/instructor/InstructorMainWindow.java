@@ -25,13 +25,13 @@ import databaseapplication.CommonMethods;
 
 public class InstructorMainWindow extends JFrame{
     /*
-     * assigning grade cutoffs (view , update , delete)
-     * assigning grading componenets (view , update , delete)
-     * assinging points (view , update , delete)
-     * view students in a section 
+  	//TODO assigning grade cutoffs (view , update , delete)
+  	//TODO assigning grading componenets (view , update , delete)
+  	//TODO assinging points (view , update , delete)
+ 	//view students in a section 
      * 
      */
-	private static Connection conn;	
+	//private static Connection conn;	
 	public InstructorMainWindow() {
 
 	
