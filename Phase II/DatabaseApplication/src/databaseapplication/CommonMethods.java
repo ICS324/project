@@ -25,7 +25,6 @@ public class CommonMethods {
 		Statement s = conn.createStatement();
 		ResultSet r = s.executeQuery(query);
 		
-<<<<<<< HEAD
 		while(r.next());
 		
 		JTable a = new JTable(r.getRow()+1,r.getMetaData().getColumnCount());
@@ -33,14 +32,6 @@ public class CommonMethods {
 		
 		r = s.executeQuery(query);
 		for(int i=0;i<a.getColumnCount();i++){//attributes
-=======
-		//while(r.next());//no need for this, just use r.last
-		r.last();
-		JTable a = new JTable(r.getRow()+1,r.getMetaData().getColumnCount());
-		//r = s.executeQuery(query);//Also why you are executing the query again? no need to do that
-		r.first();
-		for(int i=0;i<a.getColumnCount();i++)//attributes
->>>>>>> origin/master
 			a.setValueAt(r.getMetaData().getColumnLabel(i+1), 0, i);
 			a.getColumnModel().getColumn(i).setPreferredWidth(r.getMetaData().getColumnLabel(i+1).length()*10);
 		}
