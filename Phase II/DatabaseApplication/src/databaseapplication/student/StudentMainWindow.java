@@ -59,7 +59,7 @@ public class StudentMainWindow extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent ev) {
 		try{
-		query = "SELECT * FROM STUDENT WHERE Mcode = \'" + lblInput.getText()+"\'";
+		query = "SELECT * FROM STUDENT WHERE code = \'" + lblInput.getText()+"\'";
 		   s = conn.createStatement ();
 		   r = s.executeQuery(query);
 	      if (ev.getActionCommand().equals("List Students"))
