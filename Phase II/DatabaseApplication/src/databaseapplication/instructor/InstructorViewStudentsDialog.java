@@ -25,7 +25,7 @@ public class InstructorViewStudentsDialog extends JFrame{
 			f.setEditable(false);
 			add(f,BorderLayout.NORTH);
 			ScrollPane p = new ScrollPane();
-			t = cm.CreateTable(cm.getConnection(),"select * from works_on");
+			t = cm.CreateTable(cm.getConnection(),"select * from major");
 			p.add(t);
 			add(p,BorderLayout.CENTER);
 

@@ -12,7 +12,8 @@ public class CommonMethods {
 	
 	public Connection getConnection(){
 	   try {
-		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620.");
+		//return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620.");
+		   return DriverManager.getConnection("jdbc:oracle:thin:@ics-db.ccse.kfupm.edu.sa:1521:xe","s201224780","201224780");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
