@@ -34,17 +34,20 @@ public class InstructorMainWindow extends JFrame{
 	private static Connection conn;	
 	public InstructorMainWindow() {
 
-		this.setSize(500, 500);		//TODO
-		
-		try {
-			conn = DriverManager.getConnection("jdbc:derby://localhost:1527/AppDB","ibrahim","ibrahim");
-			//TODO keep this "jdbc:oracle:thin:@localhost:1521:xe"
-			JTable a = new CommonMethods().CreateTable(conn,"select fname,minit,lname,ssn from employee");
-			this.add(a);
-			this.setVisible(true);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	
+		new InstructorViewStudentsDialog();
+//		this.setSize(500, 500);		//TODO
+//		JTable a = null;
+//		try {
+//			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620.");
+//			//TODO keep this "jdbc:oracle:thin:@localhost:1521:xe"
+//			a = new CommonMethods().CreateTable(conn,"select fname,minit,lname,ssn from employee");
+//			
+//		} catch (SQLException e) {			
+//			e.printStackTrace();
+//		}
+//		this.add(a);
+//		this.setVisible(true);
 	}
 	
 }
