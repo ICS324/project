@@ -23,7 +23,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    	new InstructorMainWindow();
+    	//new InstructorMainWindow();
         // TODO code application logic here
         try{
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

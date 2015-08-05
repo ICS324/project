@@ -9,7 +9,7 @@ import java.sql.Statement;
 import javax.swing.JTable;
 
 public class CommonMethods {
-	//Nice work
+	
 	public Connection getConnection(){
 	   try {
 		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620.");
