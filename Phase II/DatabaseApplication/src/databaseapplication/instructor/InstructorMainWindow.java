@@ -24,46 +24,10 @@ import databaseapplication.CommonMethods;
  */
 
 public class InstructorMainWindow extends JFrame{
-    /*
-  	//TODO assigning grade cutoffs (view , update , delete)
-  	//TODO assigning grading componenets (view , update , delete)
-  	//TODO assinging points (view , update , delete)
- 	//view students in a section 
-     * 
-     * 
-     * 
+    	
+	public InstructorMainWindow() {	
+		
 
-			--grading components
-			--select name,max_points,weight from grading_component where course_number =1234
-			--delete from grading_component where id = 1
-			--insert into grading_component values ('2', 'Midterm', '25', '25', '1234', '1')
-			
-			--grading cutoffs
-			--update grading_cutoffs set value= 100 where sec_ref_num = 1231 and letter_grade='A+'
-			--select letter_grade,value from grading_cutoffs where sec_ref_num = 1231 order by value desc
-			--delete from grading_cutoffs where sec_ref_num = 1231 and value = 98
-			--insert into grading_cutoffs values ('A+',98,1231)
-			
-			--view students taught by instructor x
-			--select section."number" as "SECTION NUMBER",student_id,concat(concat(first_name,' '),last_name) as name from section join enrollment on (section_refrence_number = refrence_number) join student on (student_id = id) where instructor_id = 1 order by "number",student_id
-     */
-	//private static Connection conn;	
-	public InstructorMainWindow() {
-
-	
-		new InstructorViewStudentsDialog();
-//		this.setSize(500, 500);		//TODO
-//		JTable a = null;
-//		try {
-//			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620.");
-//			//TODO keep this "jdbc:oracle:thin:@localhost:1521:xe"
-//			a = new CommonMethods().CreateTable(conn,"select fname,minit,lname,ssn from employee");
-//			
-//		} catch (SQLException e) {			
-//			e.printStackTrace();
-//		}
-//		this.add(a);
-//		this.setVisible(true);
 	}
 	
 }

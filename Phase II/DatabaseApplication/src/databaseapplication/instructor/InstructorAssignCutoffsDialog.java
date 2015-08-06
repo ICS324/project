@@ -20,18 +20,16 @@ public class InstructorAssignCutoffsDialog {
 	public InstructorAssignCutoffsDialog() {
 		CommonMethods cm = new CommonMethods();
 		ArrayList<String> courses = null;
+		int i_ID = 2;//TODO variable
 		try {
-			ResultSet r = cm.getConnection().createStatement().executeQuery("select REFRENCE_NUMBER from section where INSTRUCTOR_ID = 2");
+			ResultSet r = cm.getConnection().createStatement().executeQuery("select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+i_ID);
 				
 			courses = new ArrayList<String>();
 			while(r.next())
 				courses.add(r.getString(1));
 				
 			System.out.println();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (SQLException e) {}
 		if(courses.isEmpty()){
 			JOptionPane.showMessageDialog(null,"This instuctor dont have any section");
 			

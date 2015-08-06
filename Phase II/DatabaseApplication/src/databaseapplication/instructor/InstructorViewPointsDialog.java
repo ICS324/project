@@ -12,38 +12,33 @@ import javax.swing.JTextField;
 
 import databaseapplication.CommonMethods;
 
-public class InstructorViewStudentsDialog extends JFrame{
-	
-	private JTable t;
-
-	InstructorViewStudentsDialog(){
+public class InstructorViewPointsDialog extends JFrame{
+	public InstructorViewPointsDialog() {
 		String var = "";
 		while(var.length()==0){
-			var = JOptionPane.showInputDialog("enter instructor's id");//TODO variable
+			var = JOptionPane.showInputDialog("enter section reference number");//TODO variable
 			if(var==null)
 				return;
 		}
 		
 		CommonMethods cm = new CommonMethods();
 		setLayout(new BorderLayout());
+		JTable t = null;
 		try {
-			JTextField f = new JTextField("the list of students");
+			JTextField f = new JTextField("the points");
 			f.setBackground(Color.LIGHT_GRAY);
 			f.setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
 			f.setEditable(false);
 			add(f,BorderLayout.NORTH);
 			ScrollPane p = new ScrollPane();
 			t = cm.CreateTable(cm.getConnection(),
-					"select section.\"number\" as \"SECTION NUMBER\",student_id,concat(concat(first_name,' '),last_name) as name from section join enrollment on (section_refrence_number = refrence_number) join student on (student_id = id) where instructor_id = \'" + var+"\' order by \"number\",student_id");
+					"select Student.id, CONCAT(CONCAT(first_name, ' '), last_name) name,POINT.EARNED_POINTS EARNED,GRADING_COMPONENT.NAME \"IN\" from STUDENT join POINT join GRADING_COMPONENT on(POINT.GRADING_COMPONENT_ID=GRADING_COMPONENT.ID) on (STUDENT.ID = POINT.ENROLLMENT_STUDENT_ID) where ENROLLMENT_REFRENCE_NUMBER = "+var+" order by POINT.GRADING_COMPONENT_ID asc,\"ID\" asc");
 			p.add(t);
 			add(p,BorderLayout.CENTER);
 
-			} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			} catch (SQLException e) {}
 		setSize((int) (t.getPreferredSize().width*1.25 +50 ),t.getPreferredSize().height*2 +50);
 		setVisible(true);
+
 	}
-	
 }
