@@ -20,10 +20,10 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewStudentsDialog();}});
 		
-		JButton as = new JButton("Assign Students");
+		JButton as = new JButton("Assign Cutoffs");
 		as.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new InstructorViewStudentsDialog();}});
+				new InstructorAssignCutoffsDialog();}});
 		
 		f.add(vs);
 		f.add(as);

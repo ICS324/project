@@ -13,15 +13,17 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class CommonMethods {
 	
 	public Connection getConnection(){
-	   try {
-		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620.");
-		//   return DriverManager.getConnection("jdbc:oracle:thin:@ics-db.ccse.kfupm.edu.sa:1521:xe","s201224780","201224780");
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	return null;
+		String[][] users = {{"jdbc:derby://localhost:1527/ProjectDB","ibrahim","ibrahim"},
+							{"jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620."},
+							{"jdbc:oracle:thin:@ics-db.ccse.kfupm.edu.sa:1521:xe","s201224780","201224780"}
+							};
 		
+		for (String[] x : users) {
+			try {
+				return DriverManager.getConnection(x[0],x[1],x[2]);					
+			} catch (SQLException e) {}			
+		}
+		return null;//unsuccesful
 	}
 
 	public JTable CreateTable(Connection conn,String query) throws SQLException {
