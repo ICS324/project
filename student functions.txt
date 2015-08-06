@@ -1,3 +1,0 @@
-register a course 
-drop a course 
-view grades 
