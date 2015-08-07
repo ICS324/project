@@ -58,6 +58,7 @@ public class StudentMainWindow extends JFrame implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent ev) {
+		
 		try{
 		query = "SELECT * FROM STUDENT WHERE code = \'" + lblInput.getText()+"\'";
 		   s = conn.createStatement ();
@@ -76,7 +77,7 @@ public class StudentMainWindow extends JFrame implements ActionListener
 			}
 			catch (Exception e){
 			}
-		
+	
 	}
 	
 	
@@ -84,8 +85,8 @@ public class StudentMainWindow extends JFrame implements ActionListener
 	public static void main(String args []) throws SQLException
 	{
 
-	   connStr = "jdbc:oracle:thin:@ics-db.ccse.kfupm.edu.sa:1521:xe";
-	   conn = DriverManager.getConnection(connStr,"s201236760","201236760");
+		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","201236760");
+	   conn = DriverManager.getConnection(connStr,"system","201236760");
 
 
 	  new StudentMainWindow();
