@@ -15,6 +15,7 @@ public class CommonMethods {
 	public Connection getConnection(){
 		String[][] users = {{"jdbc:derby://localhost:1527/ProjectDB","ibrahim","ibrahim"},
 							{"jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620."},
+							{"jdbc:oracle:thin:@localhost:1521:xe","system","201236760"},
 							{"jdbc:oracle:thin:@ics-db.ccse.kfupm.edu.sa:1521:xe","s201224780","201224780"}
 							};
 		
