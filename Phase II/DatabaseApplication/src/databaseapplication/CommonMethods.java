@@ -1,11 +1,14 @@
 package databaseapplication;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -57,5 +60,11 @@ public class CommonMethods {
 		return a;//table
 	}
 
-
+	public JFrame CentralizeFrame(JFrame f){
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		f.setLocation(dim.width/2-f.getSize().width/2, dim.height/2-f.getSize().height/2);
+		f.setResizable(false);
+		f.setVisible(true);
+		return f;
+	}
 }

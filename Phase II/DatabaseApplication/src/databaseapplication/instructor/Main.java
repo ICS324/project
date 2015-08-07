@@ -7,13 +7,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import databaseapplication.CommonMethods;
+
 public class Main {
 
 	public static void main(String[] args) {
 		/*
 	  	//TODO view grade cutoffs (delete)	
 	  	 * assign grade cutoffs //TODO
-	  	//TODO assigning grading componenets (delete)
+	  	//TODO assigning grading componenets
+	  	 * delete grading componenets
 	  	 * view assigned grading componenets for a section (course?)
 	  	//TODO assinging points (update , delete)
 	  	 * view points
@@ -67,6 +70,11 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewSectionStatisticsDialog();}});
 		
+		JButton dc = new JButton("Delete A Grading Componenet");
+		dc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new InstructorDeleteGradingComponenetDialog();}});
+		
 		
 		f.add(vs);
 		f.add(as);
@@ -74,8 +82,10 @@ public class Main {
 		f.add(vp);
 		f.add(vpa);
 		f.add(st);
+		f.add(dc);
+		
 		f.setDefaultCloseOperation(2);
-		f.setVisible(true);
+		f= new CommonMethods().CentralizeFrame(f);
 
 	}
 

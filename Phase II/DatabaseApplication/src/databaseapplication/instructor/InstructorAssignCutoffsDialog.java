@@ -17,6 +17,8 @@ import databaseapplication.CommonMethods;
 
 public class InstructorAssignCutoffsDialog {
 	
+	private JFrame f;
+
 	public InstructorAssignCutoffsDialog() {
 		CommonMethods cm = new CommonMethods();
 		ArrayList<String> courses = null;
@@ -36,13 +38,13 @@ public class InstructorAssignCutoffsDialog {
 			return;
 		}
 		JComboBox<Object> sections = new JComboBox<Object>(courses.toArray());
-		JFrame f = new JFrame();
+		f = new JFrame();
 		f.setLayout(new GridLayout(3,0));
 		
 		f.add(new JTextField("Select a section"));
 		f.add(sections);
 		f.setBounds(400, 300, 100, 100);
-		f.setVisible(true);
+		f=cm.CentralizeFrame(f);
 		Button button = new Button("Select");
 		button.addActionListener(new ActionListener() {
 			
@@ -55,7 +57,7 @@ public class InstructorAssignCutoffsDialog {
 				//TODO
 				
 				f.setSize(400, 400);
-				f.setVisible(true);
+				f = cm.CentralizeFrame(f);
 			}
 		});
 		f.add(button);
