@@ -10,6 +10,7 @@ import java.sql.Statement;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -66,5 +67,12 @@ public class CommonMethods {
 		f.setResizable(false);
 		f.setVisible(true);
 		return f;
+	}
+
+	public String Combo(Object[] objs, String msg){
+		String a = (String) JOptionPane.showInputDialog(
+				null,msg,null,JOptionPane.QUESTION_MESSAGE,null,objs,objs[0]);
+		
+		return a;
 	}
 }

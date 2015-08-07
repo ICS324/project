@@ -5,7 +5,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.ScrollPane;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -19,14 +22,29 @@ public class InstructorViewStudentsDialog extends JFrame{
 	private JTable t;
 
 	InstructorViewStudentsDialog(){
-		String var = "";
-		while(var.length()==0){
-			var = JOptionPane.showInputDialog("enter instructor's id");//TODO variable
-			if(var==null)
-				return;
-		}
+		String var = "1";
 		
 		CommonMethods cm = new CommonMethods();
+		Connection con = cm.getConnection();
+		
+		ArrayList<String> sections = null;
+		try {
+			ResultSet r = con.createStatement().executeQuery("select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+var);
+			if(!r.next()){
+				JOptionPane.showMessageDialog(null,"there is no section taught by instructor "+var);
+				return;
+			}
+			sections = new ArrayList<String>();
+			do{
+				sections.add(r.getString(1));
+			}while(r.next());
+			
+		} catch (SQLException e){}
+		
+		String section = cm.Combo(sections.toArray(), "select a section");
+		if(section==null)
+			return;
+
 		setLayout(new BorderLayout());
 		try {
 			JTextField f = new JTextField("the list of students");
@@ -36,7 +54,7 @@ public class InstructorViewStudentsDialog extends JFrame{
 			add(f,BorderLayout.NORTH);
 			ScrollPane p = new ScrollPane();
 			t = cm.CreateTable(cm.getConnection(),
-					"select section.\"number\" as \"SECTION NUMBER\",student_id,concat(concat(first_name,' '),last_name) as name from section join enrollment on (section_refrence_number = refrence_number) join student on (student_id = id) where instructor_id = \'" + var+"\' order by \"number\",student_id");
+					"select student_id,concat(concat(first_name,' '),last_name) as name from enrollment join student on (student_id = id) where SECTION_REFRENCE_NUMBER = "+section+" order by student_id");
 			p.add(t);
 			add(p,BorderLayout.CENTER);
 

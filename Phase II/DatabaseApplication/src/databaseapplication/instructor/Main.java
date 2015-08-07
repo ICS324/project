@@ -37,10 +37,10 @@ public class Main {
 				
 	     */		
 		JFrame f = new JFrame();
-		f.setBounds(400, 300, 400, 300);
-		f.setLayout(new GridLayout(4,3));
+		f.setSize(500, 400);
+		f.setLayout(new GridLayout(5,3));
 		
-		JButton vs = new JButton("View Students");
+		JButton vs = new JButton("View Students");//TODO final touch //TODO extract as new table
 		vs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewStudentsDialog();}});
@@ -50,30 +50,31 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorAssignCutoffsDialog();}});
 		
-		JButton vc = new JButton("View Grading Componenets");
+		JButton vc = new JButton("View Grading Componenets");//TODO final touch //TODO extract as new table
 		vc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewGradingComponentsDialog();}});
 		
-		JButton vp = new JButton("View Points For A Section");
+		JButton vp = new JButton("View Points For A Section");//TODO final touch //TODO extract as new table
 		vp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewPointsDialog();}});
 		
-		JButton vpa = new JButton("View Points For An Activity");
+		JButton vpa = new JButton("View Points For An Activity");//TODO final touch //TODO extract as new table
 		vpa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewActivityPointsDialog();}});
 		
-		JButton st = new JButton("View Statisics For A Section");
-		st.addActionListener(new ActionListener() {
+		JButton st = new JButton("View Statisics For A Section");//TODO final touch //TODO extract as new table
+		st.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewSectionStatisticsDialog();}});
 		
-		JButton dc = new JButton("Delete A Grading Componenet");
+		JButton dc = new JButton("Delete A Grading Componenet");//TODO final touch
 		dc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorDeleteGradingComponenetDialog();}});
+		
 		
 		
 		f.add(vs);
