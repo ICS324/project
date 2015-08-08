@@ -16,7 +16,7 @@ import databaseapplication.CommonMethods;
 public class InstructorDeleteGradingComponenetDialog{
 
 	InstructorDeleteGradingComponenetDialog(){
-		String var1 = "1234";
+		
 		String var = "1";
 
 		ArrayList<String> courses = null;
@@ -41,9 +41,9 @@ public class InstructorDeleteGradingComponenetDialog{
 			return;
 		ArrayList<String> numbers = null;
 		try {
-			ResultSet r = con.createStatement().executeQuery("select name from grading_component where course_number = "+var1);
+			ResultSet r = con.createStatement().executeQuery("select name from grading_component where course_number = "+course);
 			if(!r.next()){
-				JOptionPane.showMessageDialog(null,"there is no grading component in "+var1);
+				JOptionPane.showMessageDialog(null,"there is no grading component in "+course);
 				return;
 			}
 			numbers = new ArrayList<String>();
@@ -58,8 +58,8 @@ public class InstructorDeleteGradingComponenetDialog{
 			return;
 				
 		try {
-			con.createStatement().executeQuery("delete from grading_component where course_number = "+var1+"and name = \'"+selected+"\'");
-			JOptionPane.showMessageDialog(null,"succesfully deleted "+selected+" grading component from course numbered"+var1);
+			con.createStatement().executeQuery("delete from grading_component where course_number = "+course+"and name = \'"+selected+"\'");
+			JOptionPane.showMessageDialog(null,"succesfully deleted "+selected+" grading component from course numbered"+course);
 		} catch (SQLException e1) {}
 	}
 }
