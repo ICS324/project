@@ -13,13 +13,14 @@ public class Main {
 
 	public static void main(String[] args) {
 		/*
-	  	 * TODO delete grade cutoffs
+	  	 * TODO delete grade cutoffs ?maybe?
 	  	 * view grade cutoffs	
-	  	 * TODO assign grade cutoffs
-	  	 * TODO assigning grading componenets
+	  	 * assign grade cutoffs
+	  	 * TODO assign grading componenets 
 	  	 * delete grading componenets
 	  	 * view assigned grading componenets for a section (course?)
-	  	 * TODO assinging points (update , delete)
+	  	 * TODO delete points ?maybe?
+	  	 * assign points
 	  	 * view points
 	  	 * view students in a section 
 	     * view activity's points
@@ -44,7 +45,7 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewStudentsDialog();}});
 
-		JButton as = new JButton("Assign Cutoffs");//TODO incompelete
+		JButton as = new JButton("Assign Cutoffs");//TODO final touch //TODO extract as new table
 		as.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorAssignCutoffsDialog();}});
@@ -83,6 +84,11 @@ public class Main {
 		ap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorAssignPointsDialog();}});
+		
+//		JButton ac = new JButton("Assign Grading Cutoffs");//TODO final touch
+//		ac.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				new InstructorAssignPointsDialog();}});
 		
 		
 		f.add(vs);f.add(as);f.add(vc);f.add(vp);
