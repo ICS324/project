@@ -55,7 +55,7 @@ public class SuperManager {
     }
     
     public static void startApp(){
-        connection = new ConnectionManager("jdbc:derby://localhost:1527/ProjectDB","ibrahim","ibrahim","C:\\Users\\Ibrahim\\Documents\\GitHub\\ICS_324_Project\\Phase II\\DatabaseApplication\\src\\DatabaseKeys.txt");
+        connection = new ConnectionManager("jdbc:derby://localhost:1527/ProjectDB","ibrahim","ibrahim","C:\\Users\\Ibrahim\\Documents\\GitHub\\project\\Phase II\\DatabaseApplication\\src\\DatabaseKeys.txt");
         OperationResult r = connection.openConnection();
         if(r.getResult()){
             JOptionPane.showMessageDialog(null, r.getMessage(), "Connection State", JOptionPane.INFORMATION_MESSAGE);
@@ -99,5 +99,9 @@ public class SuperManager {
 
     public static ConnectionManager getConnectionManager() {
         return connection;
+    }
+
+    public static OperationResult delete(String selectedTableName, String deleteCondition) {
+       return connection.delete(selectedTableName, deleteCondition);
     }
 }

@@ -86,6 +86,9 @@ public class DataTable extends JScrollPane{
         }
     }
     public RowData getSelectedRow(){
+        if(this.table.getSelectedRow() == -1){
+            return null;
+        }
         return this.tableModel.getRow(this.table.getSelectedRow());
     }
     public int getSelectedRowIndex(){

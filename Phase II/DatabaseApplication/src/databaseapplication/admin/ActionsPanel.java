@@ -31,7 +31,7 @@ public class ActionsPanel extends JPanel{
         super.add(this.removeButton);
     }
     public void setAddRecordAction(ActionListener l){
-        
+        this.addRecordButton.addActionListener(l);
     }
     public void setRemoveRecordAction(ActionListener l){
         this.removeButton.addActionListener(l);

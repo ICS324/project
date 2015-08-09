@@ -42,7 +42,7 @@ public final class ConnectionManager implements DatabaseManager{
             this.url = url;
             this.username = userName;
             loadKeys(keysFileDir);
-            openConnection();
+            System.out.println(openConnection().getMessage());
 	}
         private void loadKeys(String dir){
             if(dir != null){
@@ -180,6 +180,7 @@ public final class ConnectionManager implements DatabaseManager{
         }
         public TableData getResultSetAsTable(String query){
             if(this.connection == null){
+                System.out.println("getResultSetAsTable(): connection is null");
                 return null;
             }
             

@@ -73,6 +73,7 @@ public class AppDatabaseEditTable extends DataTable{
                 String refCol = (String)this.fKeys.get(i, 3);
                 System.out.println("select "+refCol+" from "+refTable);
                 TableData fkData = this.manager.getResultSetAsTable("select "+refCol+" from "+refTable);
+                System.out.println(""+fkData);
                 JComboBox<String> fkComboBox = new JComboBox<>();
                 for(int j = 0 ; j < fkData.rows() ; j++){
                     fkComboBox.addItem((String)fkData.get(j, 0));
