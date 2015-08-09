@@ -5,6 +5,7 @@
 <ownerDesignName>Model</ownerDesignName>
 <engineerTo>
 <item key="AFC86F26-8F5D-61FE-BCBF-242E384F58C2" value="true"/>
+<item key="4A6B339D-A859-C788-F6B5-F0905E41F3F3" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -21,6 +22,7 @@
 <ownerDesignName>Model</ownerDesignName>
 <engineerTo>
 <item key="AFC86F26-8F5D-61FE-BCBF-242E384F58C2" value="true"/>
+<item key="4A6B339D-A859-C788-F6B5-F0905E41F3F3" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
@@ -35,6 +37,7 @@
 <ownerDesignName>Model</ownerDesignName>
 <engineerTo>
 <item key="AFC86F26-8F5D-61FE-BCBF-242E384F58C2" value="true"/>
+<item key="4A6B339D-A859-C788-F6B5-F0905E41F3F3" value="true"/>
 </engineerTo>
 <referedAttribute>1D6B2BD0-6F3C-DB94-CFE4-DB2535BE0C18</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -51,6 +54,7 @@
 <ownerDesignName>Model</ownerDesignName>
 <engineerTo>
 <item key="AFC86F26-8F5D-61FE-BCBF-242E384F58C2" value="true"/>
+<item key="4A6B339D-A859-C788-F6B5-F0905E41F3F3" value="true"/>
 </engineerTo>
 <referedAttribute>24CC20F0-4F6B-CFE4-C34B-565776531F86</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -58,6 +62,23 @@
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>11 CHAR</dataTypeSize>
 <ownDataTypeParameters>11 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="number1" id="905368A5-6970-1E51-EA44-63E4E8E415C0">
+<createdBy>Ibrahim</createdBy>
+<createdTime>2015-08-09 11:02:41 UTC</createdTime>
+<generatorID>26FFC99B-404A-4A55-D70F-8131B4541E02</generatorID>
+<ownerDesignName>Model</ownerDesignName>
+<engineerTo>
+<item key="AFC86F26-8F5D-61FE-BCBF-242E384F58C2" value="true"/>
+<item key="4A6B339D-A859-C788-F6B5-F0905E41F3F3" value="true"/>
+</engineerTo>
+<referedAttribute>45B1CE25-5C6D-1152-C0E5-AD082B051795</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>0</dataTypePrecision>
+<dataTypeScale>4</dataTypeScale>
+<ownDataTypeParameters>,0,4</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
@@ -67,11 +88,13 @@
 <ownerDesignName>Model</ownerDesignName>
 <engineerTo>
 <item key="AFC86F26-8F5D-61FE-BCBF-242E384F58C2" value="true"/>
+<item key="4A6B339D-A859-C788-F6B5-F0905E41F3F3" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
 <attributeRef>DE320B47-92C8-D19B-5BA7-89AFBF27FC67</attributeRef>
 <attributeRef>ABE75B05-F90A-6C00-A0C3-555715D5C17D</attributeRef>
+<attributeRef>905368A5-6970-1E51-EA44-63E4E8E415C0</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

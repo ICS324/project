@@ -5,6 +5,7 @@
 <ownerDesignName>Model</ownerDesignName>
 <engineerTo>
 <item key="AFC86F26-8F5D-61FE-BCBF-242E384F58C2" value="true"/>
+<item key="4A6B339D-A859-C788-F6B5-F0905E41F3F3" value="true"/>
 </engineerTo>
 <adequatelyNormalized>NO</adequatelyNormalized>
 <expectedVolumes>0</expectedVolumes>
@@ -21,6 +22,7 @@
 <ownerDesignName>Model</ownerDesignName>
 <engineerTo>
 <item key="AFC86F26-8F5D-61FE-BCBF-242E384F58C2" value="true"/>
+<item key="4A6B339D-A859-C788-F6B5-F0905E41F3F3" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
@@ -37,6 +39,7 @@
 <ownerDesignName>Model</ownerDesignName>
 <engineerTo>
 <item key="AFC86F26-8F5D-61FE-BCBF-242E384F58C2" value="true"/>
+<item key="4A6B339D-A859-C788-F6B5-F0905E41F3F3" value="true"/>
 </engineerTo>
 <referedAttribute>CE9E8B84-1939-26A5-6F7F-40BD1404C93D</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -53,6 +56,7 @@
 <ownerDesignName>Model</ownerDesignName>
 <engineerTo>
 <item key="AFC86F26-8F5D-61FE-BCBF-242E384F58C2" value="true"/>
+<item key="4A6B339D-A859-C788-F6B5-F0905E41F3F3" value="true"/>
 </engineerTo>
 <referedAttribute>DE320B47-92C8-D19B-5BA7-89AFBF27FC67</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -69,6 +73,7 @@
 <ownerDesignName>Model</ownerDesignName>
 <engineerTo>
 <item key="AFC86F26-8F5D-61FE-BCBF-242E384F58C2" value="true"/>
+<item key="4A6B339D-A859-C788-F6B5-F0905E41F3F3" value="true"/>
 </engineerTo>
 <referedAttribute>ABE75B05-F90A-6C00-A0C3-555715D5C17D</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
@@ -76,6 +81,23 @@
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>11 CHAR</dataTypeSize>
 <ownDataTypeParameters>11 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="number1" id="ABA76940-D6E8-7EF5-BC32-3BE699159C48">
+<createdBy>Ibrahim</createdBy>
+<createdTime>2015-08-09 11:02:41 UTC</createdTime>
+<generatorID>6F33FF17-5A33-F6BC-C623-29CC7B0A9AF1</generatorID>
+<ownerDesignName>Model</ownerDesignName>
+<engineerTo>
+<item key="AFC86F26-8F5D-61FE-BCBF-242E384F58C2" value="true"/>
+<item key="4A6B339D-A859-C788-F6B5-F0905E41F3F3" value="true"/>
+</engineerTo>
+<referedAttribute>905368A5-6970-1E51-EA44-63E4E8E415C0</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>0</dataTypePrecision>
+<dataTypeScale>4</dataTypeScale>
+<ownDataTypeParameters>,0,4</ownDataTypeParameters>
 </Attribute>
 </attributes>
 </Entity>
