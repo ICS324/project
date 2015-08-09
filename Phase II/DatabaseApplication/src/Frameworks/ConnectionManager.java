@@ -42,7 +42,7 @@ public final class ConnectionManager {
             this.url = url;
             this.username = userName;
             loadKeys(keysFileDir);
-	    openConnection();
+            openConnection();
 	}
         private void loadKeys(String dir){
             if(dir != null){
