@@ -26,7 +26,7 @@ public class InstructorAssignPointsDialog extends JFrame {
 		String var = "1";
 		
 		CommonMethods cm = new CommonMethods();
-		Connection con = cm.getConnection();
+		final Connection con = cm.getConnection();
 		
 		ArrayList<String> SRNs = null;
 		try {
@@ -43,7 +43,7 @@ public class InstructorAssignPointsDialog extends JFrame {
 		} catch (SQLException e){}
 		
 		section = cm.Combo(SRNs.toArray(), "select a section");
-		String course = section+"";
+		final String course = section+"";
 		section = section.substring(0, section.length()-1);/*		FIXME		*/
 		if(section==null)
 			return;
@@ -82,7 +82,7 @@ public class InstructorAssignPointsDialog extends JFrame {
 		} catch (SQLException e) {}
 		
 		
-		DefaultTableModel model = (DefaultTableModel)table.getModel();
+		final DefaultTableModel model = (DefaultTableModel)table.getModel();
 	    model.addColumn("");
 	    model.setValueAt("POINTS("+max+")", 0, 2);
 	    

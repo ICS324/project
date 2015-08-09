@@ -25,8 +25,8 @@ public class InstructorAssignCutoffsDialog extends JFrame {
 	private JTable table;
 
 	public InstructorAssignCutoffsDialog() {
-		CommonMethods cm = new CommonMethods();
-		Connection con = cm.getConnection();
+		final CommonMethods cm = new CommonMethods();
+		final Connection con = cm.getConnection();
 		int i_ID = 1;//TODO variable
 
 		ArrayList<String> sections = null;
@@ -43,15 +43,15 @@ public class InstructorAssignCutoffsDialog extends JFrame {
 			
 		} catch (SQLException e){}
 		
-		String section = cm.Combo(sections.toArray(), "select a section");
+		final String section = cm.Combo(sections.toArray(), "select a section");
 		if(section==null)
 			return;
 				
 		
 		setSize(200, 300);
 		setLayout(new BorderLayout());
-		JTextField letter = new JTextField();
-		JTextField mark = new JTextField();
+		final JTextField letter = new JTextField();
+		final JTextField mark = new JTextField();
 		JButton button = new JButton("Add");
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout());
