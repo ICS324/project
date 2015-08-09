@@ -13,28 +13,28 @@ public class Main {
 
 	public static void main(String[] args) {
 		/*
-	  	//TODO view grade cutoffs (delete)	
-	  	 * assign grade cutoffs //TODO
-	  	//TODO assigning grading componenets
+	  	 * TODO delete grade cutoffs ?maybe?
+	  	 * view grade cutoffs	
+	  	 * assign grade cutoffs
+	  	 * TODO assign grading componenets 
 	  	 * delete grading componenets
 	  	 * view assigned grading componenets for a section (course?)
-	  	//TODO assinging points (update , delete)
+	  	 * TODO delete points ?maybe?
+	  	 * assign points
 	  	 * view points
-	 	 * view students in a section 
+	  	 * view students in a section 
 	     * view activity's points
 	     * view section's statistics 
 	     * 
-
-				--grading components
-				--delete from grading_component where id = 1
-				--insert into grading_component values ('2', 'Midterm', '25', '25', '1234', '1')
-				
-				--grading cutoffs
-				--update grading_cutoffs set value= 100 where sec_ref_num = 1231 and letter_grade='A+'
-				--select letter_grade,value from grading_cutoffs where sec_ref_num = 1231 order by value desc
-				--delete from grading_cutoffs where sec_ref_num = 1231 and value = 98
-				--insert into grading_cutoffs values ('A+',98,1231)
-				
+	     *		
+	     *	grading components
+	     *		delete from grading_component where id = 1
+	     *		insert into grading_component values ('2', 'Midterm', '25', '25', '1234', '1')
+	     *				
+	     *	grading cutoffs
+	     *		update grading_cutoffs set value= 100 where sec_ref_num = 1231 and letter_grade='A+'
+	     *		delete from grading_cutoffs where sec_ref_num = 1231 and value = 98
+	     *		insert into grading_cutoffs values ('A+',98,1231)	
 	     */		
 		JFrame f = new JFrame();
 		f.setSize(500, 400);
@@ -44,8 +44,8 @@ public class Main {
 		vs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewStudentsDialog();}});
-		
-		JButton as = new JButton("Assign Cutoffs");//TODO incompelete
+
+		JButton as = new JButton("Assign Cutoffs");//TODO final touch //TODO extract as new table
 		as.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorAssignCutoffsDialog();}});
@@ -75,15 +75,26 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorDeleteGradingComponenetDialog();}});
 		
+		JButton vgc = new JButton("View Grading Cutoffs");//TODO final touch
+		vgc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new InstructorViewGradingCutoffsDialog();}});
+		
+		JButton ap = new JButton("Assign Points");//TODO final touch
+		ap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new InstructorAssignPointsDialog();}});
+		
+//		JButton ac = new JButton("Assign Grading Cutoffs");//TODO final touch
+//		ac.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				new InstructorAssignPointsDialog();}});
 		
 		
-		f.add(vs);
-		f.add(as);
-		f.add(vc);
-		f.add(vp);
-		f.add(vpa);
-		f.add(st);
-		f.add(dc);
+		f.add(vs);f.add(as);f.add(vc);f.add(vp);
+		f.add(vpa);f.add(st);f.add(dc);f.add(vgc);
+		f.add(ap);
+		
 		
 		f.setDefaultCloseOperation(2);
 		f= new CommonMethods().CentralizeFrame(f);
