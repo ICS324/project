@@ -20,20 +20,26 @@ import java.sql.*;
 import java.util.*;
 
 
-/**
- *
- * @author Ibrahim
- */
+
 
 
 public class StudentMainWindow extends JFrame implements ActionListener
 {
-
-  JPanel pane = new JPanel();
+	public static int height = 1200;
+	public static int width = 400;
+	JPanel pane = new JPanel();
+	JPanel pane1 = new JPanel();
+	JPanel pane2 = new JPanel();
+	JPanel pane3 = new JPanel();
+  JFrame frame = new JFrame();
   JLabel lb = new JLabel("Enter a major");
-  JButton b1 = new JButton("List Students");
+  JButton b1 = new JButton("List Courses");
   static TextField  lblInput = new TextField  (20);
-  TextArea  lblOutput = new TextArea  ();
+  TextArea  lblOutput0 = new TextArea  ();
+  TextArea  lblOutput1 = new TextArea  ();
+  TextArea  lblOutput2 = new TextArea  ();
+
+
 	  static String connStr ;
 	  static Connection conn ;
 	  static String query ;
@@ -43,13 +49,46 @@ public class StudentMainWindow extends JFrame implements ActionListener
 	  public StudentMainWindow()
   {
     super("Gui");
-    setSize(400,200);
+    setSize(height,width);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setLayout(new BorderLayout());
     pane.add(lb);
     pane.add(lblInput);
+    pane.add(lblOutput0);
     pane.add(b1);
-    add(lblOutput);
+    pane.setBorder(new javax.swing.border.TitledBorder("Registering courses"));
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.getContentPane().setLayout(new java.awt.GridLayout(0, 1));
+    pane1.add(lb);
+    pane1.add(lblInput);
+    pane1.add(lblOutput0);
+    pane1.add(b1);
+    pane1.setBorder(new javax.swing.border.TitledBorder("Dropping courses"));
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.getContentPane().setLayout(new java.awt.GridLayout(0, 1));
+    pane2.add(lb);
+    pane2.add(lblInput);
+    pane2.add(lblOutput0);
+    pane2.add(b1);
+    pane2.setBorder(new javax.swing.border.TitledBorder("Viewing grades"));
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.getContentPane().setLayout(new java.awt.GridLayout(0, 1));
+    pane3.add(lb);
+    pane3.add(lblInput);
+    pane3.add(lblOutput0);
+    pane3.add(b1);
+    pane3.setBorder(new javax.swing.border.TitledBorder("Other functions"));
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.getContentPane().setLayout(new java.awt.GridLayout(0, 1));
+    frame.getContentPane().add(pane);
+    frame.getContentPane().add(pane1);
+    frame.getContentPane().add(pane2);
+    frame.getContentPane().add(pane3);
+    frame.setSize(height,width);
+    frame.setVisible(true);
+    lblInput.requestFocus();
+    lblOutput0.requestFocus();
+    add(frame);
     add(pane,BorderLayout.NORTH);
     setVisible(true);
     b1.addActionListener(this);
@@ -65,9 +104,9 @@ public class StudentMainWindow extends JFrame implements ActionListener
 		   r = s.executeQuery(query);
 	      if (ev.getActionCommand().equals("List Students"))
 			if(!r.next())
-			lblOutput.setText("No Student with this major");
+				lblOutput0.setText("No Student with this major");
 			do{
-			lblOutput.setText(lblOutput.getText()+r.getString(1)+" 		"+r.getString(2)+" 		"+r.getString(3)+" 		"+"\n");
+				lblOutput0.setText(lblOutput0.getText()+r.getString(1)+" 		"+r.getString(2)+" 		"+r.getString(3)+" 		"+"\n");
 			} while(r.next());
 
 
@@ -86,7 +125,7 @@ public class StudentMainWindow extends JFrame implements ActionListener
 	{
 
 		conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","201236760");
-	   conn = DriverManager.getConnection(connStr,"system","201236760");
+	   
 
 
 	  new StudentMainWindow();
