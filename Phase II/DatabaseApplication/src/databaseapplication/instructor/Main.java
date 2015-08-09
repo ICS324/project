@@ -31,27 +31,14 @@ static CommonMethods cm;
                 
                 /*
 	  	 * TODO delete grade cutoffs ?maybe?
-	  	 * view grade cutoffs	
-	  	 * assign grade cutoffs
 	  	 * TODO assign grading componenets 
-	  	 * delete grading componenets
-	  	 * view assigned grading componenets for a section (course?)
-	  	 * TODO delete points ?maybe?
-	  	 * assign points
-	  	 * view points
-	  	 * view students in a section 
-	     * view activity's points
-	     * view section's statistics 
-	     * 
-	     *		
+	  	 
 	     *	grading components
-	     *		delete from grading_component where id = 1
 	     *		insert into grading_component values ('2', 'Midterm', '25', '25', '1234', '1')
 	     *				
 	     *	grading cutoffs
-	     *		update grading_cutoffs set value= 100 where sec_ref_num = 1231 and letter_grade='A+'
 	     *		delete from grading_cutoffs where sec_ref_num = 1231 and value = 98
-	     *		insert into grading_cutoffs values ('A+',98,1231)	
+	     
 	     */		
 		JFrame f = new JFrame();
 		f.setSize(525, 275);
@@ -62,7 +49,7 @@ static CommonMethods cm;
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewStudentsDialog();}});
 
-		JButton as = new JButton("Assign");//TODO extract as new table
+		JButton as = new JButton("Add");//TODO extract as new table
 		as.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorAssignCutoffsDialog();}});
@@ -101,7 +88,20 @@ static CommonMethods cm;
 		ap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorAssignPointsDialog();}});
-		JPanel[] p = {new JPanel(),new JPanel(),new JPanel(),new JPanel()};
+		
+                JButton ag = new JButton("Add");
+		ag.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new InstructorAssignGradingComponentDialog();}});
+		
+                JButton dco = new JButton("Delete");
+		dco.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new InstructorDeleteGradingCutoffDialog();}});
+		
+                
+                
+                JPanel[] p = {new JPanel(),new JPanel(),new JPanel(),new JPanel()};
                 GridLayout g = new GridLayout();
                 g.setHgap(5);
 
@@ -124,8 +124,11 @@ static CommonMethods cm;
                         "Cutoffs"));
                 
                 
-		p[2].add(ap);p[0].add(vs);p[3].add(as);p[1].add(vc);p[2].add(vp);
-		p[2].add(vpa);p[2].add(st);p[1].add(dc);p[3].add(vgc);
+		
+                p[0].add(vs);//student
+                p[1].add(ag);p[1].add(vc);p[1].add(dc);//components
+                p[2].add(ap);p[2].add(vp);p[2].add(vpa);p[2].add(st);//points
+		p[3].add(as);p[3].add(vgc);p[3].add(dco);//cutoffs
 		
 		
                 for (JPanel a : p)
