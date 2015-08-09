@@ -5,6 +5,7 @@
  */
 package Frameworks.UI;
 
+import java.awt.Component;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,20 +15,25 @@ import javax.swing.JTextField;
  *
  * @author Ibrahim
  */
-public class LabeledTextField extends JPanel{
+public class LabeledInputMethod extends JPanel{
     private JLabel label;
-    private JTextField textField;
+    private InputMethod input;
     
-    public LabeledTextField(String label){
+    public LabeledInputMethod(String label){
         this.label = new JLabel(""+label);
-        this.textField = new JTextField();
-        
+ 
         super.setLayout(new GridLayout(2,1));
         super.add(this.label);
-        super.add(this.textField);
+        
     }
-    
-    public String getText(){
-        return this.textField.getText();
+    public void setInputMethod(InputMethod input){
+        if(this.input != null){
+            super.remove((Component)this.input);
+        }
+        this.input = input;
+        super.add((Component)input);
+    }
+    public String getalue(){
+        return this.input.getValue();
     }
 }
