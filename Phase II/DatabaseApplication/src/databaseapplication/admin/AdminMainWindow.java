@@ -54,6 +54,7 @@ public class AdminMainWindow extends JFrame{
             }
         });
         this.panel.setRemoveRecordAction(new RemoveAction(this));
+        this.panel.setAddRecordAction(new AddAction(this));
     }
     private void buildUI(){
         super.setDefaultCloseOperation(3);
@@ -66,6 +67,76 @@ public class AdminMainWindow extends JFrame{
         super.setLocationRelativeTo(null);
         super.setVisible(true);
         
+    }
+    private class AddAction implements ActionListener{
+        private JFrame Parent;
+
+        public AddAction(JFrame Parent){
+            this.Parent = Parent;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(dbTable.getSlectedTableName() == null){
+                JOptionPane.showMessageDialog(Parent, "No selected table!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            if(dbTable.getSlectedTableName().compareToIgnoreCase("student") == 0){
+                showStudentDialog();
+            }
+            else if(dbTable.getSlectedTableName().compareToIgnoreCase("instructor") == 0){
+                showInstructorDialog();
+            }
+            else{
+                JOptionPane.showMessageDialog(Parent, "You are not allowed to modify this table!", "Info", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        private void showInstructorDialog(){
+            final InstructorDialog dialog = new InstructorDialog(this.Parent);
+            dialog.addOkButtonClickEvent(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String instId = dialog.getID(); 
+                    String fName = dialog.getFirstName();
+                    String lName = dialog.getLastName();
+                    OperationResult result = SuperManager.insert("instructor", ""+instId+",'"+fName+"','"+lName+"'");
+                    if(result.getResult()){
+                        JOptionPane.showMessageDialog(Parent, "New record was inserted!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                        dialog.setVisible(false);
+                        dialog.dispose();
+                        dbTable.selectData("instructor");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(Parent, result.getMessage(), "Info", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            dialog.setVisible(true); 
+        }
+        private void showStudentDialog(){
+            final StudentDialog dialog = new StudentDialog(this.Parent);
+            dialog.addOkButtonClickEvent(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String studentId = dialog.getID(); 
+                    String fName = dialog.getFirstName();
+                    String lName = dialog.getLastName();
+                    String major = dialog.getMajor();
+                    OperationResult result = SuperManager.insert("student", ""+studentId+",'"+fName+"','"+lName+"','"+major+"'");
+                    if(result.getResult()){
+                        JOptionPane.showMessageDialog(Parent, "New record was inserted!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                        dialog.setVisible(false);
+                        dialog.dispose();
+                        dbTable.selectData("student");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(Parent, result.getMessage(), "Info", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            dialog.setVisible(true); 
+        }
     }
     private class RemoveAction implements ActionListener{
         

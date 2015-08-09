@@ -164,6 +164,7 @@ public final class ConnectionManager implements DatabaseManager{
             String message = "Done!";
             try{
                 Statement s = this.connection.createStatement();
+                System.out.println("insert into "+tabelName+" values ("+value+")");
                 s.executeUpdate("insert into "+tabelName+" values ("+value+")");
                 return new OperationResult(true, message);
             }

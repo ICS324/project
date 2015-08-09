@@ -7,6 +7,8 @@ package databaseapplication.admin;
 
 import Frameworks.UI.LabeledInputMethod;
 import Frameworks.UI.OkCancelPanel;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
@@ -29,6 +31,7 @@ public class AddEditDialog extends JDialog{
         buildUI();
     }
     private void init(){
+        this.inputMethods = new LinkedList<>();
         this.okCancelPanel = new OkCancelPanel();
         this.inputMethodContainer = new JPanel();
         this.okCancelPanel.addCancelClickEvent(new ActionListener(){
@@ -41,9 +44,10 @@ public class AddEditDialog extends JDialog{
         });
     }
     private void buildUI() {
+        this.inputMethodContainer.setLayout(new GridBagLayout());
         super.add("South",this.okCancelPanel);
         super.add("Center",this.inputMethodContainer);
-        super.setSize(200, 300);
+        super.setSize(300, 200);
         super.setLocationRelativeTo(this.parent);
     }
 
@@ -53,8 +57,14 @@ public class AddEditDialog extends JDialog{
                 this.inputMethodContainer.remove(inputMethod);
             }catch(Exception ex){System.out.println(ex);}
         }
-        for (LabeledInputMethod inputMethod : this.inputMethods) {
-            this.inputMethodContainer.add(inputMethod);
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.gridx = 0;
+        
+        for (int i = 0 ; i < this.inputMethods.size() ; i++) {
+            c.gridy = i;
+            this.inputMethodContainer.add(this.inputMethods.get(i),c);
         }
     }
     public void addLabeledInputMethod(LabeledInputMethod input){

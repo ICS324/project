@@ -22,7 +22,7 @@ public class LabeledInputMethod extends JPanel{
     public LabeledInputMethod(String label){
         this.label = new JLabel(""+label);
  
-        super.setLayout(new GridLayout(2,1));
+        super.setLayout(new GridLayout(1,2));
         super.add(this.label);
         
     }
@@ -33,7 +33,11 @@ public class LabeledInputMethod extends JPanel{
         this.input = input;
         super.add((Component)input);
     }
-    public String getalue(){
+    public String getValue(){
         return this.input.getValue();
+    }
+
+    public void setValue(String string) {
+        this.input.setValue(string);
     }
 }

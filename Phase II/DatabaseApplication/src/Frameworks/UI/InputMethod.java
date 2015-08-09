@@ -11,4 +11,5 @@ package Frameworks.UI;
  */
 public interface InputMethod {
     public String getValue();
+    public void setValue(String value);
 }
