@@ -22,7 +22,7 @@ public class ActionsPanel extends JPanel{
         buildUI();
     }
     private void init(){
-        this.removeButton = new JButton("Remove");
+        this.removeButton = new JButton("Remove Selecte Record");
         this.addRecordButton = new JButton("Add");
     }
     private void buildUI(){
@@ -34,6 +34,6 @@ public class ActionsPanel extends JPanel{
         
     }
     public void setRemoveRecordAction(ActionListener l){
-        
+        this.removeButton.addActionListener(l);
     }
 }

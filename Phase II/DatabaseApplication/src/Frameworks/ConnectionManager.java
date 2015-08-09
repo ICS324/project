@@ -15,7 +15,7 @@ import java.util.LinkedList;
  * @version 1.0
  * @created 04-Aug-2015 2:34:02 AM
  */
-public final class ConnectionManager {
+public final class ConnectionManager implements DatabaseManager{
 
 	private Connection connection;
 	private String password;
@@ -159,6 +159,7 @@ public final class ConnectionManager {
 	 * @param tabelName the name of the table.
          * @return <code>OperationResult</code> object.
 	 */
+        @Override
 	public OperationResult insert(String tabelName, String value){
             String message = "Done!";
             try{
@@ -226,6 +227,22 @@ public final class ConnectionManager {
 
     public TableData getForeignKeys() {
         return this.foreignKeys;
+    }
+
+    @Override
+    public OperationResult update(String tableName, String newVals, String condition) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public OperationResult delete(String tableName, String condition) {
+        String message = "Deleted !";
+        try{
+            Statement s = this.connection.createStatement();
+            s.executeUpdate("delete from "+tableName+" where "+condition);
+            return new OperationResult(true,message);
+        }
+        catch(SQLException ex){return new OperationResult(false,ex.getMessage());}
     }
 
 }

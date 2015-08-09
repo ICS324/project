@@ -85,11 +85,21 @@ public class DataTable extends JScrollPane{
             this.tableModel.fireTableDataChanged();
         }
     }
-    
+    public RowData getSelectedRow(){
+        return this.tableModel.getRow(this.table.getSelectedRow());
+    }
+    public int getSelectedRowIndex(){
+        return this.table.getSelectedRow();
+    }
+    public int getSelectedColumnIndex(){
+        return this.table.getSelectedColumn();
+    }
     public TableData getTableData(){
         return this.tableModel.getTableData();
     } 
-
+    public String [] getColumnsNames(){
+        return this.tableModel.getColumnsNames();
+    }
     public Object getValueAt(int rowIndex, int columnIndex) {
         return this.tableModel.getValueAt(rowIndex, columnIndex);
     }

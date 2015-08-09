@@ -5,6 +5,7 @@
  */
 package databaseapplication.admin;
 
+import Frameworks.table.RowData;
 import databaseapplication.SuperManager;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -48,6 +49,16 @@ public class AdminMainWindow extends JFrame{
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 dbTable.selectData((String)tablesList.getSelectedValue());
+            }
+        });
+        this.panel.setRemoveRecordAction(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedTableName = (String)tablesList.getSelectedValue();
+                RowData selectedRow = dbTable.getSelectedRow();
+                String [] tableFields = dbTable.getColumnsNames();
+                //more to add later
             }
         });
     }
