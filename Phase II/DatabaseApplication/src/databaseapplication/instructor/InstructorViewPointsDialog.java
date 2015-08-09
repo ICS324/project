@@ -44,19 +44,16 @@ public class InstructorViewPointsDialog extends JFrame{
 		
 		setLayout(new BorderLayout());
 		JTable t = null;
-		try {
-			JTextField f = new JTextField("the points");
-			f.setBackground(Color.LIGHT_GRAY);
-			f.setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
-			f.setEditable(false);
-			add(f,BorderLayout.NORTH);
-			ScrollPane p = new ScrollPane();
-			t = cm.CreateTable(con,
-					"select Student.id, CONCAT(CONCAT(first_name, ' '), last_name) name,POINT.EARNED_POINTS EARNED,GRADING_COMPONENT.NAME \"IN\" from STUDENT join POINT join GRADING_COMPONENT on(POINT.GRADING_COMPONENT_ID=GRADING_COMPONENT.ID) on (STUDENT.ID = POINT.ENROLLMENT_STUDENT_ID) where ENROLLMENT_REFRENCE_NUMBER = "+section+" order by POINT.GRADING_COMPONENT_ID asc,\"ID\" asc");
-			p.add(t);
-			add(p,BorderLayout.CENTER);
-
-			} catch (SQLException e) {}
+                JTextField f = new JTextField("the points");
+                f.setBackground(Color.LIGHT_GRAY);
+                f.setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
+                f.setEditable(false);
+                add(f,BorderLayout.NORTH);
+                ScrollPane p = new ScrollPane();
+                t = cm.CreateTable(con,
+                        "select Student.id, CONCAT(CONCAT(first_name, ' '), last_name) name,POINT.EARNED_POINTS EARNED,GRADING_COMPONENT.NAME \"IN\" from STUDENT join POINT join GRADING_COMPONENT on(POINT.GRADING_COMPONENT_ID=GRADING_COMPONENT.ID) on (STUDENT.ID = POINT.ENROLLMENT_STUDENT_ID) where ENROLLMENT_REFRENCE_NUMBER = "+section+" order by POINT.GRADING_COMPONENT_ID asc,\"ID\" asc");
+                p.add(t);
+                add(p,BorderLayout.CENTER);
 		setSize((int) (t.getPreferredSize().width*1.25 +50 ),t.getPreferredSize().height*2 +50);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);

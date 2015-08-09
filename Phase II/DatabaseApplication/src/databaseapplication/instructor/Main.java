@@ -8,11 +8,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import databaseapplication.CommonMethods;
+import java.sql.Connection;
 
 public class Main {
-
+static Connection con;
+        
 	public static void main(String[] args) {
-		/*
+                con = new CommonMethods().getConnection();
+
+                
+                /*
 	  	 * TODO delete grade cutoffs ?maybe?
 	  	 * view grade cutoffs	
 	  	 * assign grade cutoffs

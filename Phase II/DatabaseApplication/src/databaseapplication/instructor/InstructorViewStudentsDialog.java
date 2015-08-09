@@ -25,7 +25,7 @@ public class InstructorViewStudentsDialog extends JFrame{
 		String var = "1";
 		
 		CommonMethods cm = new CommonMethods();
-		Connection con = cm.getConnection();
+		Connection con = Main.con;
 		
 		ArrayList<String> sections = null;
 		try {
@@ -40,28 +40,22 @@ public class InstructorViewStudentsDialog extends JFrame{
 			}while(r.next());
 			
 		} catch (SQLException e){}
-		
+		          
 		String section = cm.Combo(sections.toArray(), "select a section");
 		if(section==null)
 			return;
-
+                             
 		setLayout(new BorderLayout());
-		try {
-			JTextField f = new JTextField("the list of students");
-			f.setBackground(Color.LIGHT_GRAY);
-			f.setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
-			f.setEditable(false);
-			add(f,BorderLayout.NORTH);
-			ScrollPane p = new ScrollPane();
-			t = cm.CreateTable(cm.getConnection(),
-					"select student_id,concat(concat(first_name,' '),last_name) as name from enrollment join student on (student_id = id) where SECTION_REFRENCE_NUMBER = "+section+" order by student_id");
-			p.add(t);
-			add(p,BorderLayout.CENTER);
-
-			} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+                JTextField f = new JTextField("the list of students");
+                f.setBackground(Color.LIGHT_GRAY);
+                f.setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
+                f.setEditable(false);
+                add(f,BorderLayout.NORTH);
+                ScrollPane p = new ScrollPane();
+                t = cm.CreateTable(con,
+                        "select student_id,concat(concat(first_name,' '),last_name) as name from enrollment join student on (student_id = id) where SECTION_REFRENCE_NUMBER = "+section+" order by student_id");
+                p.add(t);
+                add(p,BorderLayout.CENTER);
 		setSize((int) (t.getPreferredSize().width*1.25 +50 ),t.getPreferredSize().height*2 +50);
 
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

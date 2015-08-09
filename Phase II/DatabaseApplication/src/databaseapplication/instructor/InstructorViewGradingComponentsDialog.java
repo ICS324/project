@@ -44,19 +44,16 @@ public class InstructorViewGradingComponentsDialog extends JFrame {
 
 		setLayout(new BorderLayout());
 		JTable t = null;
-		try {
-			JTextField f = new JTextField("the grading components of section "+selected);
-			f.setBackground(Color.LIGHT_GRAY);
-			f.setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
-			f.setEditable(false);
-			add(f,BorderLayout.NORTH);
-			ScrollPane p = new ScrollPane();
-			t = cm.CreateTable(cm.getConnection(),
-					"select name,max_points,weight from grading_component where course_number ="+selected);
-			p.add(t);
-			add(p,BorderLayout.CENTER);
-
-			} catch (SQLException e) {}
+                JTextField f = new JTextField("the grading components of section "+selected);
+                f.setBackground(Color.LIGHT_GRAY);
+                f.setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
+                f.setEditable(false);
+                add(f,BorderLayout.NORTH);
+                ScrollPane p = new ScrollPane();
+                t = cm.CreateTable(cm.getConnection(),
+                        "select name,max_points,weight from grading_component where course_number ="+selected);
+                p.add(t);
+                add(p,BorderLayout.CENTER);
 		setSize((int) (t.getPreferredSize().width*1.25 +50 ),t.getPreferredSize().height*2 +50);
 
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

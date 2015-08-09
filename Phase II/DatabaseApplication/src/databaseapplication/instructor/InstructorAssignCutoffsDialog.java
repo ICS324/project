@@ -60,11 +60,8 @@ public class InstructorAssignCutoffsDialog extends JFrame {
 		
 		panel.add(button);
 		
-		try {
-
-			table = cm.CreateTable(con, "SELECT GRADING_CUTOFFS.LETTER_GRADE, GRADING_CUTOFFS.VALUE FROM GRADING_CUTOFFS WHERE GRADING_CUTOFFS.SEC_REF_NUM = "+section);
-			add(table,BorderLayout.CENTER);
-		} catch (SQLException e) {}
+                table = cm.CreateTable(con, "SELECT GRADING_CUTOFFS.LETTER_GRADE, GRADING_CUTOFFS.VALUE FROM GRADING_CUTOFFS WHERE GRADING_CUTOFFS.SEC_REF_NUM = "+section+"order by value desc");
+                add(table,BorderLayout.CENTER);
 		button.addActionListener(new ActionListener() {
 			
 			@Override

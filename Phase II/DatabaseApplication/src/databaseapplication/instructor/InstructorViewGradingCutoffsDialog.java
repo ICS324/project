@@ -43,19 +43,16 @@ public class InstructorViewGradingCutoffsDialog extends JFrame {
 		
 		setLayout(new BorderLayout());
 		JTable t = null;
-		try {
-			JTextField f = new JTextField("the cutoffs for section "+section);
-			f.setBackground(Color.LIGHT_GRAY);
-			f.setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
-			f.setEditable(false);
-			add(f,BorderLayout.NORTH);
-			ScrollPane p = new ScrollPane();
-			t = cm.CreateTable(con,
-					"select letter_grade,value from GRADING_CUTOFFS where SEC_REF_NUM = "+section+" order by value desc");
-			p.add(t);
-			add(p,BorderLayout.CENTER);
-
-			} catch (SQLException e) {}
+                JTextField f = new JTextField("the cutoffs for section "+section);
+                f.setBackground(Color.LIGHT_GRAY);
+                f.setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
+                f.setEditable(false);
+                add(f,BorderLayout.NORTH);
+                ScrollPane p = new ScrollPane();
+                t = cm.CreateTable(con,
+                        "select letter_grade,value from GRADING_CUTOFFS where SEC_REF_NUM = "+section+" order by value desc");
+                p.add(t);
+                add(p,BorderLayout.CENTER);
 		setSize((int) (t.getPreferredSize().width*1.25 +50 ),t.getPreferredSize().height*2 +50);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
