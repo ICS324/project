@@ -20,29 +20,18 @@ import databaseapplication.CommonMethods;
 public class InstructorViewGradingComponentsDialog extends JFrame {
 	
 	public InstructorViewGradingComponentsDialog() {
-		String var = "1";
-		CommonMethods cm = new CommonMethods();
-		Connection con = cm.getConnection();
-		
-		ArrayList<String> components = null;
-		try {
-			ResultSet r = con.createStatement().executeQuery("select distinct COURSE_NUMBER from grading_component where INSTRUCTOR_ID = "+var);
-			if(!r.next()){
-				JOptionPane.showMessageDialog(null,var+" dont have any grading compnenets");
-				return;
-			}
-			components = new ArrayList<String>();
-			do{
-				components.add(r.getString(1));
-			}while(r.next());
-			
-		} catch (SQLException e){}
-		
-		String selected = cm.Combo(components.toArray(), "select a course");
-		if(selected==null)
-			return;
+                CommonMethods cm = Main.cm;
+                Connection con = Main.con;
+                
+                String selected = cm.getFrom(cm, con
+                    ,"select distinct COURSE_NUMBER from grading_component where INSTRUCTOR_ID = "+Main.instructorID
+                    ,Main.instructorID+" dont have any grading compnenets"
+                    ,"select a course");
+                
+                if(selected==null)
+                    return;
 
-		setLayout(new BorderLayout());
+                setLayout(new BorderLayout());
 		JTable t = null;
                 JTextField f = new JTextField("the grading components of section "+selected);
                 f.setBackground(Color.LIGHT_GRAY);

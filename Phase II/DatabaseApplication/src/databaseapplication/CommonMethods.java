@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+
+import databaseapplication.instructor.Main;
 
 public class CommonMethods {
 	
@@ -71,7 +74,7 @@ public class CommonMethods {
             }
 		return a;//table
 	}
-        private int getRows(ResultSet r){
+    private int getRows(ResultSet r){
             ResultSet temp = r;
             int i = 0;
             try {
@@ -95,4 +98,25 @@ public class CommonMethods {
 		
 		return a;
 	}
+
+	public String getFrom(CommonMethods cm, Connection con,String query,String msg,String choose) {
+		String selection;
+		ArrayList<String> choices = null;
+		try {
+		    ResultSet r = con.createStatement().executeQuery(query);
+		    if(!r.next()){
+		        JOptionPane.showMessageDialog(null,msg);
+		        return null;
+		    }
+		    choices = new ArrayList<String>();
+		    do{
+		        choices.add(r.getString(1));
+		    }while(r.next());
+
+		} catch (SQLException e){}
+
+		selection = cm.Combo(choices.toArray(), choose);
+		return selection;
+	}
+
 }

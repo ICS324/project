@@ -20,27 +20,17 @@ import databaseapplication.CommonMethods;
 public class InstructorViewActivityPointsDialog extends JFrame {
 	
 		public InstructorViewActivityPointsDialog() {
-			String var = "1";
-			CommonMethods cm = new CommonMethods();
-			Connection con = cm.getConnection();
-			ArrayList<String> activities = null;
-			try {
-				ResultSet r = con.createStatement().executeQuery("select id from grading_component where INSTRUCTOR_ID = "+var);
-				if(!r.next()){
-					JOptionPane.showMessageDialog(null,"there is no activity assigned by instructor "+var);
-					return;
-				}
-				activities = new ArrayList<String>();
-				do{
-					activities.add(r.getString(1));
-				}while(r.next());
-				
-			} catch (SQLException e){}
-			
-			String activity = cm.Combo(activities.toArray(), "select activity");
-			if(activity==null)
-				return;
-		
+
+			CommonMethods cm = Main.cm;
+                        Connection con = Main.con;
+
+                String activity = cm.getFrom(cm, con
+                        ,"select id from grading_component where INSTRUCTOR_ID = "+Main.instructorID
+                        ,"there is no activity assigned by instructor "+Main.instructorID
+                        , "select an activity");
+   		if(activity==null)
+                    return;
+
 			setLayout(new BorderLayout());
 			JTable t = null;
 			try {

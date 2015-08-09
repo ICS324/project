@@ -12,9 +12,15 @@ import java.sql.Connection;
 
 public class Main {
 static Connection con;
-        
+static String instructorID;
+static CommonMethods cm;
 	public static void main(String[] args) {
-                con = new CommonMethods().getConnection();
+            if(args.length==0)
+                instructorID = "1";
+            else
+                instructorID = args[0];
+            cm = new CommonMethods();
+            con = cm.getConnection();
 
                 
                 /*
@@ -45,57 +51,53 @@ static Connection con;
 		f.setSize(500, 400);
 		f.setLayout(new GridLayout(5,3));
 		
-		JButton vs = new JButton("View Students");//TODO final touch //TODO extract as new table
+		JButton vs = new JButton("View Students");//TODO extract as new table
 		vs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewStudentsDialog();}});
 
-		JButton as = new JButton("Assign Cutoffs");//TODO final touch //TODO extract as new table
+		JButton as = new JButton("Assign Cutoffs");//TODO extract as new table
 		as.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorAssignCutoffsDialog();}});
 		
-		JButton vc = new JButton("View Grading Componenets");//TODO final touch //TODO extract as new table
+		JButton vc = new JButton("View Grading Componenets");//TODO extract as new table
 		vc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewGradingComponentsDialog();}});
 		
-		JButton vp = new JButton("View Points For A Section");//TODO final touch //TODO extract as new table
+		JButton vp = new JButton("View Points For A Section");//TODO extract as new table
 		vp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewPointsDialog();}});
 		
-		JButton vpa = new JButton("View Points For An Activity");//TODO final touch //TODO extract as new table
+		JButton vpa = new JButton("View Points For An Activity");//TODO extract as new table
 		vpa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewActivityPointsDialog();}});
 		
-		JButton st = new JButton("View Statisics For A Section");//TODO final touch //TODO extract as new table
+		JButton st = new JButton("View Statisics For A Section");//TODO extract as new table
 		st.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewSectionStatisticsDialog();}});
 		
-		JButton dc = new JButton("Delete A Grading Componenet");//TODO final touch
+		JButton dc = new JButton("Delete A Grading Componenet");
 		dc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorDeleteGradingComponenetDialog();}});
 		
-		JButton vgc = new JButton("View Grading Cutoffs");//TODO final touch
+		JButton vgc = new JButton("View Grading Cutoffs");
 		vgc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorViewGradingCutoffsDialog();}});
 		
-		JButton ap = new JButton("Assign Points");//TODO final touch
+		JButton ap = new JButton("Assign Points");
 		ap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new InstructorAssignPointsDialog();}});
 		
-//		JButton ac = new JButton("Assign Grading Cutoffs");//TODO final touch
-//		ac.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				new InstructorAssignPointsDialog();}});
-		
-		
+
+                
 		f.add(vs);f.add(as);f.add(vc);f.add(vp);
 		f.add(vpa);f.add(st);f.add(dc);f.add(vgc);
 		f.add(ap);

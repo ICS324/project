@@ -19,29 +19,14 @@ import databaseapplication.CommonMethods;
 
 public class InstructorViewSectionStatisticsDialog extends JFrame{
 	public InstructorViewSectionStatisticsDialog() {
-		String var = "1";
-		
-		
-		CommonMethods cm = new CommonMethods();
-		Connection con = cm.getConnection();
-		ArrayList<String> courses = null;
-		try {
-			ResultSet r = con.createStatement().executeQuery("select distinct REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+var);
-			if(!r.next()){
-				JOptionPane.showMessageDialog(null,"there is no course assigned to instructor "+var);
-				return;
-			}
-			courses = new ArrayList<String>();
-			do{
-				courses.add(r.getString(1));
-			}while(r.next());
-			
-		} catch (SQLException e){}
-		
-		String section = cm.Combo(courses.toArray(), "select course");
-		if(section==null)
-			return;
-		
+                CommonMethods cm = Main.cm;
+                Connection con = Main.con;		
+                String section = cm.getFrom(cm, con
+         	   	    ,"select distinct REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+Main.instructorID
+            	   	 ,"there is no course assigned to instructor "+Main.instructorID
+               		 ,"select a section");
+           	if(section==null)
+                	return;
 		
 		setLayout(new BorderLayout());
 		JTable t = null;

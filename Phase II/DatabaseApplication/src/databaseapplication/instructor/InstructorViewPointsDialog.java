@@ -19,29 +19,16 @@ import databaseapplication.CommonMethods;
 
 public class InstructorViewPointsDialog extends JFrame{
 	public InstructorViewPointsDialog() {
-		String var = "1";
+            CommonMethods cm = Main.cm;
+            Connection con = Main.con;
 		
-		CommonMethods cm = new CommonMethods();
-		Connection con = cm.getConnection();
-		
-		ArrayList<String> SRNs = null;
-		try {
-			ResultSet r = con.createStatement().executeQuery("select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+var);
-			if(!r.next()){
-				JOptionPane.showMessageDialog(null,"there is no section taught by instructor "+var);
-				return;
-			}
-			SRNs = new ArrayList<String>();
-			do{
-				SRNs.add(r.getString(1));
-			}while(r.next());
-			
-		} catch (SQLException e){}
-		
-		String section = cm.Combo(SRNs.toArray(), "select reference number");
-		if(section==null)
-			return;
-		
+                String section = cm.getFrom(cm, con
+                    ,"select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+Main.instructorID
+                    ,"there is no section taught by instructor "+Main.instructorID
+                    ,"select reference number");
+                		if(section==null)
+                			return;
+
 		setLayout(new BorderLayout());
 		JTable t = null;
                 JTextField f = new JTextField("the points");

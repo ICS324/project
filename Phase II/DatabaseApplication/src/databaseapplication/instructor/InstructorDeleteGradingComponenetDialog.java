@@ -17,28 +17,17 @@ public class InstructorDeleteGradingComponenetDialog{
 
 	InstructorDeleteGradingComponenetDialog(){
 		
-		String var = "1";
+                CommonMethods cm = Main.cm;
+                Connection con = Main.con;
+		
+                String course = cm.getFrom(cm, con
+                        ,"select distinct course_number from grading_component where INSTRUCTOR_ID = "+Main.instructorID
+            	   	 ,"there is no course assigned to be supervised by instructor "+Main.instructorID
+               		 ,"select a course");
+                if(course==null)
+                    return;
 
-		ArrayList<String> courses = null;
-		CommonMethods cm = new CommonMethods();
-		Connection con = cm.getConnection();
-		
-		try {
-			ResultSet r = con.createStatement().executeQuery("select distinct course_number from grading_component where INSTRUCTOR_ID = "+var);
-			if(!r.next()){
-				JOptionPane.showMessageDialog(null,"there is no course assigned to be supervised by instructor "+var);
-				return;
-			}
-			courses = new ArrayList<String>();
-			do{
-				courses.add(r.getString(1));
-			}while(r.next());
-			
-		} catch (SQLException e){}
-		
-		String course = cm.Combo(courses.toArray(), "select course");
-		if(course==null)
-			return;
+        
 		ArrayList<String> numbers = null;
 		try {
 			ResultSet r = con.createStatement().executeQuery("select name from grading_component where course_number = "+course);

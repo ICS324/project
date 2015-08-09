@@ -20,27 +20,18 @@ import databaseapplication.CommonMethods;
 public class InstructorViewGradingCutoffsDialog extends JFrame {
 
 	public InstructorViewGradingCutoffsDialog(){
-		String var = "1";
-		CommonMethods cm = new CommonMethods();
-		Connection con = cm.getConnection();
-		ArrayList<String> sections = null;
-		try {
-			ResultSet r = con.createStatement().executeQuery("select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+var);
-			if(!r.next()){
-				JOptionPane.showMessageDialog(null,"there is no section assigned to instructor "+var);
-				return;
-			}
-			sections = new ArrayList<String>();
-			do{
-				sections.add(r.getString(1));
-			}while(r.next());
-			
-		} catch (SQLException e){}
+	
+		CommonMethods cm = Main.cm;
+                Connection con = Main.con;
 		
-		String section = cm.Combo(sections.toArray(), "select a section");
-		if(section==null)
-			return;
-		
+                String section = cm.getFrom(cm, con
+         	   	    ,"select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+Main.instructorID
+            	   	 ,"there is no section assigned to instructor "+Main.instructorID
+               		 ,"select a section");
+                if(section ==null)
+                    return;
+
+        
 		setLayout(new BorderLayout());
 		JTable t = null;
                 JTextField f = new JTextField("the cutoffs for section "+section);

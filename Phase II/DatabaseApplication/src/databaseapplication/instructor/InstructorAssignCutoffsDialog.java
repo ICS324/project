@@ -25,29 +25,16 @@ public class InstructorAssignCutoffsDialog extends JFrame {
 	private JTable table;
 
 	public InstructorAssignCutoffsDialog() {
-		final CommonMethods cm = new CommonMethods();
-		final Connection con = cm.getConnection();
-		int i_ID = 1;//TODO variable
+            final CommonMethods cm = Main.cm;
+            final Connection con = Main.con;
+	
+            final String section = cm.getFrom(cm, con
+                    ,"select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+Main.instructorID
+                    ,"there is no section taught by instructor "+Main.instructorID
+                    ,"select a section");
+            if(section==null)
+                return;
 
-		ArrayList<String> sections = null;
-		try {
-			ResultSet r = con.createStatement().executeQuery("select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+i_ID);
-			if(!r.next()){
-				JOptionPane.showMessageDialog(null,"there is no section taught by instructor "+i_ID);
-				return;
-			}
-			sections = new ArrayList<String>();
-			do{
-				sections.add(r.getString(1));
-			}while(r.next());
-			
-		} catch (SQLException e){}
-		
-		final String section = cm.Combo(sections.toArray(), "select a section");
-		if(section==null)
-			return;
-				
-		
 		setSize(200, 300);
 		setLayout(new BorderLayout());
 		final JTextField letter = new JTextField();
