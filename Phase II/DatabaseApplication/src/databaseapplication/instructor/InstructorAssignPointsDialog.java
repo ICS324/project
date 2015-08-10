@@ -27,35 +27,36 @@ public class InstructorAssignPointsDialog extends JFrame {
 		CommonMethods cm = Main.cm;
                 final Connection con = Main.con;
 		
-		String section = cm.getFrom(cm, con
+		final String section = cm.getFrom(cm, con
          	   	    ,"select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+Main.instructorID
             	   	 ,"there is no section taught by instructor "+Main.instructorID
                		 ,"select a section");
                 if(section==null)
                 	return;
                 
-		final String course = section+"";
-		section = section.substring(0, section.length()-1);/*		FIXME		*/
+		String course = section.substring(0, section.length()-1);/*		FIXME		*/
 		
 		String component = cm.getFrom(cm, con
-         	   	    ,"select name FROM GRADING_COMPONENT where COURSE_NUMBER = "+section
-            	   	 ,"there is no component"+section
+         	   	    ,"select name FROM GRADING_COMPONENT where COURSE_NUMBER = "+course
+            	   	 ,"there is no component"
                		 ,"select a componenet");
                 if(component==null)
                     return;
 
+                
 		try {
-			table = cm.CreateTable(con, "select id,concat(concat(first_name,' '),last_name) as name from STUDENT join ENROLLMENT on (ENROLLMENT.STUDENT_ID=STUDENT.ID) where ENROLLMENT.SECTION_REFRENCE_NUMBER = 1231 and id NOT in (select ENROLLMENT_STUDENT_ID from point where grading_component_id =2)");
+			ResultSet r = con.createStatement().executeQuery("select id from grading_component where COURSE_NUMBER = "+course+" and name = '"+component+"'");
+			r.next();
+			componenetID = r.getString(1);
+                        
+                        table = cm.CreateTable(con, "select distinct id,concat(concat(first_name,' '),last_name) as name from STUDENT join ENROLLMENT on (ENROLLMENT.STUDENT_ID=STUDENT.ID) where id NOT in (select ENROLLMENT_STUDENT_ID from point where grading_component_id = "+componenetID+")");
 			if(table.getRowCount()==1){
 				JOptionPane.showMessageDialog(null,"there is no one to assign grade for");
 				return;
 			}
-			ResultSet r = con.createStatement().executeQuery("select max_points from GRADING_COMPONENT where COURSE_NUMBER = "+section+" and name = '"+component+"'");
+			r = con.createStatement().executeQuery("select max_points from GRADING_COMPONENT where COURSE_NUMBER = "+course+" and name = '"+component+"'");
 			r.next();
 			max = Integer.parseInt(r.getString(1));
-			r = con.createStatement().executeQuery("select id FROM GRADING_COMPONENT where COURSE_NUMBER = "+section+" and name ='"+component+"'");
-			r.next();
-			componenetID = r.getString(1);
 		} catch (SQLException e) {}
 		
 		
@@ -82,7 +83,7 @@ public class InstructorAssignPointsDialog extends JFrame {
 
                             for (int i=1;i<rows;i++) {
                                 try {
-                                    con.createStatement().executeQuery("INSERT INTO POINT VALUES ('"+model.getValueAt(i, 2).toString()+"', '"+componenetID+"', '"+model.getValueAt(i, 0).toString()+"', '"+course+"')");
+                                    con.createStatement().executeQuery("INSERT INTO POINT VALUES ('"+model.getValueAt(i, 2).toString()+"', '"+componenetID+"', '"+model.getValueAt(i, 0).toString()+"', '"+section+"')");
                                 } catch (SQLException e1) {}
                             }
                             dispose();

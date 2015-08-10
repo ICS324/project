@@ -6,12 +6,8 @@ import java.awt.Dimension;
 import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -22,7 +18,7 @@ public class InstructorViewSectionStatisticsDialog extends JFrame{
                 CommonMethods cm = Main.cm;
                 Connection con = Main.con;		
                 String section = cm.getFrom(cm, con
-         	   	    ,"select distinct REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+Main.instructorID
+                        ,"select distinct REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+Main.instructorID
             	   	 ,"there is no course assigned to instructor "+Main.instructorID
                		 ,"select a section");
            	if(section==null)

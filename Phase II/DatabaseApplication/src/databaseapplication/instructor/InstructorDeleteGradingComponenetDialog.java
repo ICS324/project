@@ -1,14 +1,10 @@
 package databaseapplication.instructor;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import databaseapplication.CommonMethods;
@@ -35,7 +31,7 @@ public class InstructorDeleteGradingComponenetDialog{
 				JOptionPane.showMessageDialog(null,"there is no grading component in "+course);
 				return;
 			}
-			numbers = new ArrayList<String>();
+			numbers = new ArrayList<>();
 			do{
 				numbers.add(r.getString(1));
 			}while(r.next());

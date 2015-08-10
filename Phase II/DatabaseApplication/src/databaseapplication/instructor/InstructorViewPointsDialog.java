@@ -6,12 +6,8 @@ import java.awt.Dimension;
 import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -26,8 +22,8 @@ public class InstructorViewPointsDialog extends JFrame{
                     ,"select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+Main.instructorID
                     ,"there is no section taught by instructor "+Main.instructorID
                     ,"select reference number");
-                		if(section==null)
-                			return;
+                if(section==null)
+                    return;
 
 		setLayout(new BorderLayout());
 		JTable t = null;

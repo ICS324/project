@@ -7,9 +7,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -68,8 +66,7 @@ public class InstructorAssignCutoffsDialog extends JFrame {
 				} catch (SQLException e1) {}
 				  catch(NumberFormatException exception){
 					JOptionPane.showMessageDialog(new JFrame(), "the value must be numeric",null,JOptionPane.ERROR_MESSAGE);
-					return;
-				}
+                                  }
 			}
 		});
 		add(panel,BorderLayout.NORTH);

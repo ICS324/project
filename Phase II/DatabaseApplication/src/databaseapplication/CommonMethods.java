@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,9 +21,9 @@ public class CommonMethods {
 	
 	public Connection getConnection(){
 		String[][] users = {
-                                    //{"jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620."}
+                                    {"jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620."}
                                     //,{"jdbc:derby://localhost:1527/ProjectDB","ibra5him","1415620."}                                    
-                                    {"jdbc:derby://localhost:1527/ProjectDB","ibrahim","ibrahim"}
+                                    //,{"jdbc:derby://localhost:1527/ProjectDB","ibrahim","ibrahim"}
                                     //,{"jdbc:oracle:thin:@localhost:1521:xe","system","201236760"}
                                     //,{"jdbc:oracle:thin:@ics-db.ccse.kfupm.edu.sa:1521:xe","s201224780","201224780"}
                                     };

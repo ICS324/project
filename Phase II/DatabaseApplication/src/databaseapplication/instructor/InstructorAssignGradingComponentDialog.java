@@ -39,7 +39,6 @@ private JTable table;
                		 ,"select a section");
                 if(course ==null)
                     return;
-                //final String course = section.substring(0, section.length()-1);/*		FIXME		*/
                 
                 setSize(300, 300);
 		setLayout(new BorderLayout());
@@ -76,7 +75,7 @@ private JTable table;
                                         String id = r.getString(1);
                                         if(id==null)
                                             id="1";
-                                        System.out.println(id);
+                                        
 					con.createStatement().executeQuery("INSERT INTO GRADING_COMPONENT  VALUES ('"+id+"', '"+name.getText()+"', '"+max.getText()+"', '"+weight.getText()+"', '"+course+"', '"+Main.instructorID+"')");
 					remove(table);					
 					table = cm.CreateTable(con, "select name,max_points,weight from grading_component where COURSE_NUMBER = +"+course+" order by id asc");

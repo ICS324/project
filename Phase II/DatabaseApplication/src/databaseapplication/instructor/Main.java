@@ -8,14 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import databaseapplication.CommonMethods;
-import databaseapplication.SuperManager;
 import java.awt.Color;
 import java.sql.Connection;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
 
 public class Main {
 static Connection con;
@@ -29,18 +25,6 @@ static CommonMethods cm;
             cm = new CommonMethods();
             con = cm.getConnection();
 
-                
-                /*
-	  	 * TODO delete grade cutoffs ?maybe?
-	  	 * TODO assign grading componenets 
-	  	 
-	     *	grading components
-	     *		insert into grading_component values ('2', 'Midterm', '25', '25', '1234', '1')
-	     *				
-	     *	grading cutoffs
-	     *		delete from grading_cutoffs where sec_ref_num = 1231 and value = 98
-	     
-	     */		
 		JFrame f = new JFrame();
 		f.setSize(525, 275);
 		f.setLayout(new GridLayout(4,0));
@@ -101,15 +85,12 @@ static CommonMethods cm;
 				new InstructorDeleteGradingCutoffDialog();}});
 		
                 
-                
                 JPanel[] p = {new JPanel(),new JPanel(),new JPanel(),new JPanel()};
                 GridLayout g = new GridLayout();
                 g.setHgap(5);
 
-                for (JPanel a : p){
+                for (JPanel a : p)
                     a.setLayout(g);
-                }
-                
                 
                 p[0].setBorder(BorderFactory.createTitledBorder(
                        BorderFactory.createLineBorder(Color.black),
@@ -123,9 +104,7 @@ static CommonMethods cm;
                 p[3].setBorder(BorderFactory.createTitledBorder(
                        BorderFactory.createLineBorder(Color.black),
                         "Cutoffs"));
-                
-                
-		
+                		
                 p[0].add(vs);//student
                 p[1].add(ag);p[1].add(vc);p[1].add(dc);//components
                 p[2].add(ap);p[2].add(vp);p[2].add(vpa);p[2].add(st);//points
