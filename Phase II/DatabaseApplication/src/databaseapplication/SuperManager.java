@@ -7,7 +7,9 @@ package databaseapplication;
 
 import Frameworks.ConnectionManager;
 import Frameworks.OperationResult;
+import Frameworks.table.TableData;
 import databaseapplication.admin.AdminMainWindow;
+import databaseapplication.instructor.InstructorMainWindow;
 
 import java.sql.ResultSet;
 import java.util.LinkedList;
@@ -30,7 +32,7 @@ public class SuperManager {
     /**
      * 
      */
-    public static void showMainWindow(){
+    public static void showMainWindow(String id){
         if(userType.compareToIgnoreCase("Admin") == 0){
             new AdminMainWindow();
         }
@@ -38,7 +40,7 @@ public class SuperManager {
            // new StudentMainWindow();
         }
         else if(userType.compareToIgnoreCase("instructor") == 0){
-           // new InstructorMainWindow();
+            new InstructorMainWindow(id);
         }
     }
     
@@ -69,11 +71,11 @@ public class SuperManager {
     
     public static OperationResult login( String loginType, String username, String password){
         if(loginType != null){
+            userName = username;
+            userType = loginType;
+            password_ = password;
             if(loginType.compareToIgnoreCase("admin") == 0){
                 if(username.compareToIgnoreCase("ibrahim") == 0 && password.compareToIgnoreCase("ibrahim") == 0){
-                    userName = username;
-                    userType = loginType;
-                    password_ = password;
                     return new OperationResult(true, "Admin login success!");
                 }
                 else{
@@ -84,6 +86,20 @@ public class SuperManager {
                 
             }
             else if(loginType.compareToIgnoreCase("instructor") == 0){
+                try{
+                    TableData data = connection.getResultSetAsTable("select id, first_name from instructor where id = "+password+" and first_name = '"+username+"'");
+                    if(data.rows() == 1){
+                        
+                        return new OperationResult(true, "Instructor login success!");
+                        
+                    }
+                    else{
+                        return new OperationResult(false,"Login failed!. incorrect username or password.");
+                    }
+                }
+                catch(Exception ex){
+                    return new OperationResult(false,"Login failed!. incorrect username or password.");
+                }
                 
             }
         }

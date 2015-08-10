@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import databaseapplication.CommonMethods;
+import databaseapplication.SuperManager;
 import java.awt.Color;
 import java.sql.Connection;
 import javax.swing.BorderFactory;
@@ -22,7 +23,7 @@ static String instructorID;
 static CommonMethods cm;
 	public static void main(String[] args) {
             if(args.length==0)
-                instructorID = "1";
+                instructorID = "201139750";
             else
                 instructorID = args[0];
             cm = new CommonMethods();

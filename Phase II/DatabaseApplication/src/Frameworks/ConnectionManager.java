@@ -179,6 +179,16 @@ public final class ConnectionManager implements DatabaseManager{
         public ResultSet getResultSet(){
             return this.resultSet;
         }
+        public String getURL(){
+            return this.url;
+        }
+        
+        public String getUserName(){
+            return this.username;
+        }
+        public String getPassword(){
+            return this.password;
+        }
         public TableData getResultSetAsTable(String query){
             if(this.connection == null){
                 System.out.println("getResultSetAsTable(): connection is null");
