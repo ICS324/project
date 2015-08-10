@@ -33,7 +33,7 @@ public class StudentMainWindow extends JFrame implements ActionListener
 JFrame f = new JFrame("The available sections");
 public static int height = 250;
 public static int width = 800;
-int StudentID = 2;
+String StudentID = "2";
 String CourseNum ;
 
 JPanel pane1 = new JPanel();
@@ -102,6 +102,7 @@ TextArea  lblOutput3 = new TextArea  ();
     
     pane2.add(lb2);
     pane2.add(lblInput2);
+    pane2.add(b2);
     pane2.setBorder(new javax.swing.border.TitledBorder("Dropping courses"));
     
    f.add(pane2);
@@ -129,37 +130,34 @@ TextArea  lblOutput3 = new TextArea  ();
 	@Override
 	public void actionPerformed(ActionEvent ev) {
 		
-
+        
         try {
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");
             if (ev.getSource() == b1){
             new SectionsDialog();
-           CourseNum=lblInput1.getText(); 
+           
             }
             else if (ev.getSource() == b12){
              new StudentViewCoursesDialog();
-                //new SectionsDialog(); 
               }
             else if (ev.getSource() == b13){
-            conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");
-            query = "INSERT into ENROLLMENT values (gd.getDate(),StudentID ,CourseNum) ";
-            query2 = "SELECT ID FROM COURSE";
+            CourseNum=lblInput1.getText();
+           
+            
+            query = "INSERT into ENROLLMENT values ('1/1/2010','1' ,'1') ";           
+                   s = conn.createStatement();
+                   r = s.executeQuery(query);
+            
+               }
+            
+            
+            else if (ev.getSource() == b2){
+            
+            query = "DELETE from ENROLLMENT whrere STUDENT_ID = \'" + "1"+"\'";
             
                    s = conn.createStatement ();
                    r = s.executeQuery(query);
-                   r2 = s.executeQuery(query2);
-             
-                   
-             lb4.setText("You dont");     
-             do {
-             if (r2.getString(1).compareTo(CourseNum)== 0 ){
-             lb4.setText("You have successfully enrolled in this course ");
-                break;
-             }
-             
-             }while (StudentMainWindow.r2.next()); 
-              }
-            else if (ev.getSource() == b2){
-                
+                             
             }
             else if (ev.getSource() == b3){
             new StudentsGradesDialog(); 

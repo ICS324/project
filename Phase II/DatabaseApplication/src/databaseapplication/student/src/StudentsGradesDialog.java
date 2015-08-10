@@ -58,8 +58,7 @@ JFrame f = new JFrame("The available courses");
         JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroll.setVerticalScrollBarPolicy(
         JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-    		//StudentMainWindow.lblInput3.getText()
-		query = "SELECT EARNED_POINTS FROM POINT where ENROLLMENT_STUDENT_ID = \'" + "1"+"\'";
+		query = "SELECT EARNED_POINTS FROM POINT where ENROLLMENT_STUDENT_ID = \'" + StudentMainWindow.lblInput3.getText()+"\'";
 		  StudentMainWindow.s = conn.createStatement ();
 		  StudentMainWindow.r = StudentMainWindow.s.executeQuery(query);
        
