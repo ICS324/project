@@ -23,12 +23,12 @@ public class InstructorAssignPointsDialog extends JFrame {
 	private String componenetID; 
 	public InstructorAssignPointsDialog(){
 
-		CommonMethods cm = Main.cm;
-                final Connection con = Main.con;
+		CommonMethods cm = PackageMainInterface.cm;
+                final Connection con = PackageMainInterface.con;
 		
 		final String section = cm.getFrom(cm, con
-         	   	    ,"select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+Main.instructorID
-            	   	 ,"there is no section taught by instructor "+Main.instructorID
+         	   	    ,"select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+PackageMainInterface.instructorID
+            	   	 ,"there is no section taught by instructor "+PackageMainInterface.instructorID
                		 ,"select a section");
                 if(section==null)
                 	return;

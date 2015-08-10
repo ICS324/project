@@ -15,11 +15,11 @@ import databaseapplication.CommonMethods;
 
 public class InstructorViewSectionStatisticsDialog extends JFrame{
 	public InstructorViewSectionStatisticsDialog() {
-                CommonMethods cm = Main.cm;
-                Connection con = Main.con;		
+                CommonMethods cm = PackageMainInterface.cm;
+                Connection con = PackageMainInterface.con;		
                 String section = cm.getFrom(cm, con
-                        ,"select distinct REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+Main.instructorID
-            	   	 ,"there is no course assigned to instructor "+Main.instructorID
+                        ,"select distinct REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+PackageMainInterface.instructorID
+            	   	 ,"there is no course assigned to instructor "+PackageMainInterface.instructorID
                		 ,"select a section");
            	if(section==null)
                 	return;

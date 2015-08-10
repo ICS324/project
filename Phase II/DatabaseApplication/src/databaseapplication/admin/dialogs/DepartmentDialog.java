@@ -19,7 +19,7 @@ import javax.swing.JFrame;
  * @author Ibrahim
  */
 public class DepartmentDialog extends AddEditDialog{
-     private LabeledInputMethod depID,deptName,depAbbev, collegeID, college;
+     private LabeledInputMethod depID,deptName, collegeID;
     public DepartmentDialog(JFrame parent) {
         super(parent);
         init();
@@ -28,10 +28,9 @@ public class DepartmentDialog extends AddEditDialog{
     public DepartmentDialog(JFrame parent, RowData toEdit){
         this(parent);
         if(toEdit != null){
-            this.depID.setValue((String)toEdit.get(0));
-            this.deptName.setValue((String)toEdit.get(1));
-            this.depAbbev.setValue((String)toEdit.get(2));
-            this.collegeID.setValue((String)toEdit.get(3));
+            this.depID.setValue((String)toEdit.get(1));
+            this.deptName.setValue((String)toEdit.get(0));
+            this.collegeID.setValue((String)toEdit.get(2));
         }
     }
     private void setForignKeyInputMethod(){
@@ -53,26 +52,18 @@ public class DepartmentDialog extends AddEditDialog{
     private void init(){
         this.depID = new LabeledInputMethod("Department ID:");
         this.deptName = new LabeledInputMethod("Name:");
-        this.depAbbev = new LabeledInputMethod("Abbreiation: ");
         this.collegeID = new LabeledInputMethod("College: ");
-        
-        MyComboBox box = new MyComboBox();
-        char c = 'A';
-        for(int i = 0 ; i < 26 ; i++){
-            box.addItem(c+"");
-            c++;
-        }
-        this.depID.setInputMethod(box);
+        this.depID.setInputMethod(new MyTextField());
         this.deptName.setInputMethod(new MyTextField());
-        this.depAbbev.setInputMethod(new MyTextField());
+
         setForignKeyInputMethod();
     }
 
     
     private void buildUI(){
-        super.addLabeledInputMethod(depID);
+        
         super.addLabeledInputMethod(this.deptName);
-        super.addLabeledInputMethod(this.depAbbev);
+        super.addLabeledInputMethod(depID);
         super.addLabeledInputMethod(this.collegeID);
 
     }
@@ -82,10 +73,6 @@ public class DepartmentDialog extends AddEditDialog{
     
     public String getDepartmentName(){
         return this.deptName.getValue();
-    }
-
-    public String getAbbreviation(){
-        return this.depAbbev.getValue();
     }
 
     public String getCollegeID() {

@@ -9,9 +9,11 @@ import Frameworks.ConnectionManager;
 import Frameworks.OperationResult;
 import Frameworks.table.TableData;
 import databaseapplication.admin.AdminMainWindow;
-import databaseapplication.instructor.InstructorMainWindow;
+import databaseapplication.instructor.PackageMainInterface;
+import databaseapplication.student.StudentMainWindow;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
@@ -37,10 +39,10 @@ public class SuperManager {
             new AdminMainWindow();
         }
         else if(userType.compareToIgnoreCase("student") == 0){
-           // new StudentMainWindow();
+            
         }
         else if(userType.compareToIgnoreCase("instructor") == 0){
-            new InstructorMainWindow(id);
+            PackageMainInterface.runInstructorUI(password_);
         }
     }
     
@@ -83,7 +85,20 @@ public class SuperManager {
                 }
             }
             else if(loginType.compareToIgnoreCase("student") == 0){
-                
+                try{
+                    TableData data = connection.getResultSetAsTable("select id, first_name from student where id = "+password+" and first_name = '"+username+"'");
+                    if(data.rows() == 1){
+                        
+                        return new OperationResult(true, "Student login success!");
+                        
+                    }
+                    else{
+                        return new OperationResult(false,"Login failed!. incorrect username or password.");
+                    }
+                }
+                catch(Exception ex){
+                    return new OperationResult(false,"Login failed!. incorrect username or password.");
+                }
             }
             else if(loginType.compareToIgnoreCase("instructor") == 0){
                 try{
@@ -119,5 +134,9 @@ public class SuperManager {
 
     public static OperationResult delete(String selectedTableName, String deleteCondition) {
        return connection.delete(selectedTableName, deleteCondition);
+    }
+
+    public static OperationResult update(String tableName, String newValues, String condition) {
+        return connection.executeUpdate(tableName, newValues, condition);
     }
 }

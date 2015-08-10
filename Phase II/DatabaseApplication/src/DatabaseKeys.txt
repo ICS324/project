@@ -3,8 +3,9 @@
 college :: id c
 student :: id c
 instructor :: id c
-major :: code
-
+major :: code c
+section :: REFRENCE_NUMBER c
+grading_component :: id
 </primary_keys>
 
 <foreign_keys>

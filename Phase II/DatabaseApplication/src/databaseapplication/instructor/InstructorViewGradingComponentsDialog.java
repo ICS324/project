@@ -16,12 +16,12 @@ import databaseapplication.CommonMethods;
 public class InstructorViewGradingComponentsDialog extends JFrame {
 	
 	public InstructorViewGradingComponentsDialog() {
-                CommonMethods cm = Main.cm;
-                Connection con = Main.con;
+                CommonMethods cm = PackageMainInterface.cm;
+                Connection con = PackageMainInterface.con;
                 
                 String selected = cm.getFrom(cm, con
-                    ,"select distinct COURSE_NUMBER from grading_component where INSTRUCTOR_ID = "+Main.instructorID
-                    ,Main.instructorID+" dont have any grading compnenets"
+                    ,"select distinct COURSE_NUMBER from grading_component where INSTRUCTOR_ID = "+PackageMainInterface.instructorID
+                    ,PackageMainInterface.instructorID+" dont have any grading compnenets"
                     ,"select a course");
                 
                 if(selected==null)

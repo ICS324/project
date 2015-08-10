@@ -17,12 +17,12 @@ import javax.swing.JOptionPane;
 class InstructorDeleteGradingCutoffDialog {
 
     public InstructorDeleteGradingCutoffDialog() {
-        CommonMethods cm = Main.cm;
-        Connection con = Main.con;
+        CommonMethods cm = PackageMainInterface.cm;
+        Connection con = PackageMainInterface.con;
 	
         String section = cm.getFrom(cm, con
-                ,"select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+Main.instructorID
-                ,"there is no section taught by instructor "+Main.instructorID
+                ,"select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+PackageMainInterface.instructorID
+                ,"there is no section taught by instructor "+PackageMainInterface.instructorID
                 ,"select a section");
         if(section==null)
             return;

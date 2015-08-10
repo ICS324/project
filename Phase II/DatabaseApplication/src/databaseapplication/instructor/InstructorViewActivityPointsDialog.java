@@ -19,12 +19,12 @@ public class InstructorViewActivityPointsDialog extends JFrame {
 	
 		public InstructorViewActivityPointsDialog() {
 
-			CommonMethods cm = Main.cm;
-                        Connection con = Main.con;
+			CommonMethods cm = PackageMainInterface.cm;
+                        Connection con = PackageMainInterface.con;
 
                 String activity = cm.getFrom(cm, con
-                        ,"select id from grading_component where INSTRUCTOR_ID = "+Main.instructorID
-                        ,"there is no activity assigned by instructor "+Main.instructorID
+                        ,"select id from grading_component where INSTRUCTOR_ID = "+PackageMainInterface.instructorID
+                        ,"there is no activity assigned by instructor "+PackageMainInterface.instructorID
                         , "select an activity");
    		if(activity==null)
                         return;

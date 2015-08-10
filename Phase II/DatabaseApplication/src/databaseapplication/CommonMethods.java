@@ -15,15 +15,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import databaseapplication.instructor.Main;
+import databaseapplication.instructor.PackageMainInterface;
 
 public class CommonMethods {
 	
 	public Connection getConnection(){
 		String[][] users = {
-                                    {"jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620."}
+                                    //{"jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620."}
                                     //,{"jdbc:derby://localhost:1527/ProjectDB","ibra5him","1415620."}                                    
-                                    //,{"jdbc:derby://localhost:1527/ProjectDB","ibrahim","ibrahim"}
+                                    {"jdbc:derby://localhost:1527/ProjectDB","ibrahim","ibrahim"}
                                     //,{"jdbc:oracle:thin:@localhost:1521:xe","system","201236760"}
                                     //,{"jdbc:oracle:thin:@ics-db.ccse.kfupm.edu.sa:1521:xe","s201224780","201224780"}
                                     };
@@ -101,7 +101,8 @@ public class CommonMethods {
 		String selection;
 		ArrayList<String> choices = null;
 		try {
-		    ResultSet r = con.createStatement().executeQuery(query);
+		    SuperManager.executeQuery(query);
+                    ResultSet r = SuperManager.getResultSet();
 		    if(!r.next()){
 		        JOptionPane.showMessageDialog(null,msg);
 		        return null;

@@ -122,6 +122,7 @@ public final class ConnectionManager implements DatabaseManager{
             String message = "done";
                 try{
                     Statement s = this.connection.createStatement();
+                    System.out.println("update "+table+" set "+values+" where "+condition);
                      s.executeUpdate("update "+table+" set "+values+" where "+condition);
                     return new OperationResult(true,message);
                 }

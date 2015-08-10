@@ -13,12 +13,12 @@ public class InstructorDeleteGradingComponenetDialog{
 
 	InstructorDeleteGradingComponenetDialog(){
 		
-                CommonMethods cm = Main.cm;
-                Connection con = Main.con;
+                CommonMethods cm = PackageMainInterface.cm;
+                Connection con = PackageMainInterface.con;
 		
                 String course = cm.getFrom(cm, con
-                        ,"select distinct course_number from grading_component where INSTRUCTOR_ID = "+Main.instructorID
-            	   	 ,"there is no course assigned to be supervised by instructor "+Main.instructorID
+                        ,"select distinct course_number from grading_component where INSTRUCTOR_ID = "+PackageMainInterface.instructorID
+            	   	 ,"there is no course assigned to be supervised by instructor "+PackageMainInterface.instructorID
                		 ,"select a course");
                 if(course==null)
                     return;

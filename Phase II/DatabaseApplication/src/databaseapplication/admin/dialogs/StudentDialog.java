@@ -14,6 +14,7 @@ import Frameworks.table.TableData;
 import databaseapplication.SuperManager;
 import java.awt.event.InputMethodListener;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +22,7 @@ import javax.swing.JFrame;
  */
 public class StudentDialog extends AddEditDialog{
     private LabeledInputMethod studentID,studentMajor,studentFirstName,studentLastName;
+    private boolean isRowNull;
     public StudentDialog(JFrame parent) {
         super(parent);
         init();
@@ -28,12 +30,21 @@ public class StudentDialog extends AddEditDialog{
     }
     public StudentDialog(JFrame parent, RowData toEdit){
         this(parent);
+
         if(toEdit != null){
+            this.isRowNull = false;
             this.studentID.setValue((String)toEdit.get(0));
             this.studentFirstName.setValue((String)toEdit.get(1));
             this.studentLastName.setValue((String)toEdit.get(2));
             this.studentMajor.setValue((String)toEdit.get(3));
         }
+        else{
+            JOptionPane.showMessageDialog(parent, "No selectet row!", "Info", JOptionPane.INFORMATION_MESSAGE);
+            this.isRowNull = true;
+        }
+    }
+    public boolean isRowNotNull(){
+        return !this.isRowNull;
     }
     private void init(){
         this.studentID = new LabeledInputMethod("Student ID:");

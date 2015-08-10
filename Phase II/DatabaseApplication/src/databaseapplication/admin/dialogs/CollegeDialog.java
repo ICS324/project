@@ -18,7 +18,7 @@ import javax.swing.JFrame;
  * @author Ibrahim
  */
 public class CollegeDialog extends AddEditDialog{
-    private LabeledInputMethod collegeID,collegeName,collegeAbbriv;
+    private LabeledInputMethod collegeID,collegeName;
     public CollegeDialog(JFrame parent) {
         super(parent);
         init();
@@ -29,31 +29,20 @@ public class CollegeDialog extends AddEditDialog{
         if(toEdit != null){
             this.collegeID.setValue((String)toEdit.get(0));
             this.collegeName.setValue((String)toEdit.get(1));
-            this.collegeAbbriv.setValue((String)toEdit.get(2));
         }
     }
     private void init(){
         this.collegeID = new LabeledInputMethod("College ID:");
         this.collegeName = new LabeledInputMethod("Name:");
-        this.collegeAbbriv = new LabeledInputMethod("Abbreiation");
         
-        MyComboBox box = new MyComboBox();
-        char c = 'A';
-        for(int i = 0 ; i < 26 ; i++){
-            box.addItem(c+"");
-            c++;
-        }
-        this.collegeID.setInputMethod(box);
+        this.collegeID.setInputMethod(new MyTextField());
         this.collegeName.setInputMethod(new MyTextField());
-        this.collegeAbbriv.setInputMethod(new MyTextField());
     }
 
     
     private void buildUI(){
-        super.addLabeledInputMethod(collegeID);
         super.addLabeledInputMethod(this.collegeName);
-        super.addLabeledInputMethod(this.collegeAbbriv);
-
+        super.addLabeledInputMethod(collegeID);
     }
     public String getCollegeID(){
         return this.collegeID.getValue();
@@ -62,9 +51,4 @@ public class CollegeDialog extends AddEditDialog{
     public String getCollegeName(){
         return this.collegeName.getValue();
     }
-
-    public String getAbbreviation(){
-        return this.collegeAbbriv.getValue();
-    }
-
 }

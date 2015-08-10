@@ -17,12 +17,12 @@ public class InstructorViewGradingCutoffsDialog extends JFrame {
 
 	public InstructorViewGradingCutoffsDialog(){
 	
-		CommonMethods cm = Main.cm;
-                Connection con = Main.con;
+		CommonMethods cm = PackageMainInterface.cm;
+                Connection con = PackageMainInterface.con;
 		
                 String section = cm.getFrom(cm, con
-         	   	    ,"select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+Main.instructorID
-            	   	 ,"there is no section assigned to instructor "+Main.instructorID
+         	   	    ,"select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+PackageMainInterface.instructorID
+            	   	 ,"there is no section assigned to instructor "+PackageMainInterface.instructorID
                		 ,"select a section");
                 if(section ==null)
                     return;

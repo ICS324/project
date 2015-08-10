@@ -62,6 +62,7 @@ public class AdminMainWindow extends JFrame{
         });
         this.panel.setRemoveRecordAction(new RemoveAction(this));
         this.panel.setAddRecordAction(new AddAction(this));
+        this.panel.addEditRecordAction(new ModifyAction(this) );
     }
     private void buildUI(){
         super.setDefaultCloseOperation(3);
@@ -73,6 +74,98 @@ public class AdminMainWindow extends JFrame{
         super.setSize(500,500);
         super.setLocationRelativeTo(null);
         super.setVisible(true);
+        
+    }
+    private class ModifyAction implements ActionListener{
+        private JFrame Parent;
+
+        private ModifyAction(JFrame aThis) {
+            this.Parent = aThis;
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(dbTable.getSlectedTableName() == null){
+                JOptionPane.showMessageDialog(Parent, "No selected table!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            if(dbTable.getSlectedTableName().compareToIgnoreCase("student") == 0){
+                showStudentDialog();
+            }
+            else if(dbTable.getSlectedTableName().compareToIgnoreCase("instructor") == 0){
+                showInstructorDialog();
+            }
+            else if(dbTable.getSlectedTableName().compareToIgnoreCase("college") == 0){
+                showAddCollegeDialog();
+            }
+            else if(dbTable.getSlectedTableName().compareToIgnoreCase("course") == 0){
+                showAddCourseDialog();
+            }
+            else if(dbTable.getSlectedTableName().compareToIgnoreCase("department") == 0){
+                showDepartmentDialog();
+            }
+            else if(dbTable.getSlectedTableName().compareToIgnoreCase("major") == 0){
+                showAddMajorDialog();
+            }
+            else if(dbTable.getSlectedTableName().compareToIgnoreCase("section") == 0){
+                showAddSectionDialog();
+            }
+            else{
+                JOptionPane.showMessageDialog(Parent, "You are not allowed to modify this table!", "Info", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+
+        private void showStudentDialog() {
+            final StudentDialog dialog = new StudentDialog(this.Parent,dbTable.getSelectedRow());
+            if(!dialog.isRowNotNull()){
+                return;
+            }
+            dialog.addOkButtonClickEvent(new ActionListener() {
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String studentId = dialog.getID(); 
+                    String fName = dialog.getFirstName();
+                    String lName = dialog.getLastName();
+                    String major = dialog.getMajor();
+                    OperationResult result = SuperManager.update("student", "id = "+studentId+", first_name = '"+fName+"', last_name = '"+lName+"', major_code = '"+major+"'"," id = "+dbTable.getSelectedRow().get(0));
+                    if(result.getResult()){
+                        JOptionPane.showMessageDialog(Parent, "Record was modifyed!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                        dialog.setVisible(false);
+                        dialog.dispose();
+                        dbTable.selectData("student");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(Parent, result.getMessage(), "Info", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            dialog.setVisible(true); 
+        }
+
+        private void showInstructorDialog() {
+            
+        }
+
+        private void showAddCollegeDialog() {
+            
+        }
+
+        private void showAddCourseDialog() {
+            
+        }
+
+        private void showDepartmentDialog() {
+            
+        }
+
+        private void showAddMajorDialog() {
+            
+        }
+
+        private void showAddSectionDialog() {
+            
+        }
         
     }
     private class AddAction implements ActionListener{
@@ -148,13 +241,12 @@ public class AdminMainWindow extends JFrame{
                     public void actionPerformed(ActionEvent e) {
                     String collName = dialog.getCollegeName(); 
                     String collId = dialog.getCollegeID();
-                    String collAbbrev = dialog.getAbbreviation();
-                    OperationResult result = SuperManager.insert("college", "'"+collId+"','"+collName+"','"+collAbbrev+"'");
+                    OperationResult result = SuperManager.insert("college", "'"+collName+"','"+collId+"'");
                     if(result.getResult()){
                         JOptionPane.showMessageDialog(Parent, "New record was inserted!", "Info", JOptionPane.INFORMATION_MESSAGE);
                         dialog.setVisible(false);
                         dialog.dispose();
-                        dbTable.selectData("department");
+                        dbTable.selectData("college");
                     }
                     else{
                         JOptionPane.showMessageDialog(Parent, result.getMessage(), "Info", JOptionPane.ERROR_MESSAGE);
@@ -171,9 +263,8 @@ public class AdminMainWindow extends JFrame{
                     public void actionPerformed(ActionEvent e) {
                     String depName = dialog.getDepartmentName(); 
                     String depId = dialog.getDepartmentID();
-                    String depAbbrev = dialog.getAbbreviation();
                     String collegeId = dialog.getCollegeID();
-                    OperationResult result = SuperManager.insert("department", "'"+depId+"','"+depName+"','"+depAbbrev+"','"+collegeId+"'");
+                    OperationResult result = SuperManager.insert("department", "'"+depName+"','"+depId+"','"+collegeId+"'");
                     if(result.getResult()){
                         JOptionPane.showMessageDialog(Parent, "New record was inserted!", "Info", JOptionPane.INFORMATION_MESSAGE);
                         dialog.setVisible(false);
@@ -274,7 +365,7 @@ public class AdminMainWindow extends JFrame{
                     JOptionPane.showMessageDialog(Parent, "No row was selected!", "Delete", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
-                int retVal = JOptionPane.showConfirmDialog(this.Parent, "Are you surethat you would like to remove the record?", "Remove Record", JOptionPane.YES_NO_OPTION);
+                int retVal = JOptionPane.showConfirmDialog(this.Parent, "Are you sure that you would like to remove the record?", "Remove Record", JOptionPane.YES_NO_OPTION);
                 if(retVal == JOptionPane.YES_OPTION){
                     String [] tableFields = dbTable.getColumnsNames();
                     String deleteCondition = "";

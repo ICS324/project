@@ -30,12 +30,12 @@ class InstructorAssignGradingComponentDialog extends JFrame {
 private JTable table;
     public InstructorAssignGradingComponentDialog()  {
         
-		final CommonMethods cm = Main.cm;
-                final Connection con = Main.con;
+		final CommonMethods cm = PackageMainInterface.cm;
+                final Connection con = PackageMainInterface.con;
 		
                 final String course = cm.getFrom(cm, con//To Edit Substring
-         	   	 ,"select \"number\",title from course where \"number\" in (select distinct SUBSTR(REFRENCE_NUMBER,0,3) from section where INSTRUCTOR_ID = "+Main.instructorID+")"
-            	   	 ,"there is no section assigned to instructor "+Main.instructorID
+         	   	 ,"select \"number\",title from course where \"number\" in (select distinct SUBSTR(REFRENCE_NUMBER,0,3) from section where INSTRUCTOR_ID = "+PackageMainInterface.instructorID+")"
+            	   	 ,"there is no section assigned to instructor "+PackageMainInterface.instructorID
                		 ,"select a section");
                 if(course ==null)
                     return;
@@ -76,7 +76,7 @@ private JTable table;
                                         if(id==null)
                                             id="1";
                                         
-					con.createStatement().executeQuery("INSERT INTO GRADING_COMPONENT  VALUES ('"+id+"', '"+name.getText()+"', '"+max.getText()+"', '"+weight.getText()+"', '"+course+"', '"+Main.instructorID+"')");
+					con.createStatement().executeQuery("INSERT INTO GRADING_COMPONENT  VALUES ('"+id+"', '"+name.getText()+"', '"+max.getText()+"', '"+weight.getText()+"', '"+course+"', '"+PackageMainInterface.instructorID+"')");
 					remove(table);					
 					table = cm.CreateTable(con, "select name,max_points,weight from grading_component where COURSE_NUMBER = +"+course+" order by id asc");
 					add(table,BorderLayout.CENTER);
