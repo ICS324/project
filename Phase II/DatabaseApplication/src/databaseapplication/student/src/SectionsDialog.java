@@ -37,8 +37,7 @@ JFrame f = new JFrame("The available sections");
     public SectionsDialog() throws SQLException  {
     Connection conn ;
     String query ;
-    conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");
-      // query = "INSERT into ENROLLMENT values (gd.getDate(),StudentID ,SecRef) ";       
+    conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");      
       query = "SELECT * FROM SECTION  where REFRENCE_NUMBER = \'" + StudentMainWindow.lblInput1.getText()+"\'";   
       String Rnum = "REFRENCE_NUMBER";
         String Snum = "SECTION_NUMBER";

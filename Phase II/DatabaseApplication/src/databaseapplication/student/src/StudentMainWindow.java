@@ -31,13 +31,11 @@ import javax.swing.JPanel;
 public class StudentMainWindow extends JFrame implements ActionListener
 {
 JFrame f = new JFrame("The available sections");
-public static int height = 300;
-public static int width = 700;
+public static int height = 250;
+public static int width = 800;
 int StudentID = 2;
-String CourseNum = "2";
-int SecRef ;
-JComboBox c1;
-Vector v = new Vector();
+String CourseNum ;
+
 JPanel pane1 = new JPanel();
 
 JPanel pane2 = new JPanel();
@@ -45,8 +43,9 @@ JPanel pane3 = new JPanel();
 public static GetCurrentDate gd;
 
 JLabel lb1 = new JLabel("Enter the course number:");
-JLabel lb2 = new JLabel("Enter a course");
+JLabel lb2 = new JLabel("Enter the course number:");
 JLabel lb3 = new JLabel("Enter Your ID");
+JLabel lb4 = new JLabel();
 
 JButton b1 = new JButton("Get Sections");
 JButton b12 = new JButton("View Courses");
@@ -70,8 +69,12 @@ TextArea  lblOutput3 = new TextArea  ();
 	  protected static String connStr ;
 	  protected static Connection conn ;
 	  protected String query ;
+          protected String query2 ;
+          protected String query3 ;
 	  protected static Statement s ;
 	  protected static ResultSet r ;
+          protected static ResultSet r2 ;
+          protected static ResultSet r3 ;
            
 	  public StudentMainWindow() throws SQLException
   {
@@ -86,6 +89,7 @@ TextArea  lblOutput3 = new TextArea  ();
     pane1.add(b1);
     pane1.add(b12);
     pane1.add(b13);
+    pane1.add(lb4);
     
     //Combo(CourseNum);
     
@@ -136,13 +140,29 @@ TextArea  lblOutput3 = new TextArea  ();
                 //new SectionsDialog(); 
               }
             else if (ev.getSource() == b13){
- 
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");
+            query = "INSERT into ENROLLMENT values (gd.getDate(),StudentID ,CourseNum) ";
+            query2 = "SELECT ID FROM COURSE";
+            
+                   s = conn.createStatement ();
+                   r = s.executeQuery(query);
+                   r2 = s.executeQuery(query2);
+             
+                   
+             lb4.setText("You dont");     
+             do {
+             if (r2.getString(1).compareTo(CourseNum)== 0 ){
+             lb4.setText("You have successfully enrolled in this course ");
+                break;
+             }
+             
+             }while (StudentMainWindow.r2.next()); 
               }
             else if (ev.getSource() == b2){
                 
             }
             else if (ev.getSource() == b3){
-                
+            new StudentsGradesDialog(); 
             }
             
             else{}       
@@ -155,39 +175,7 @@ TextArea  lblOutput3 = new TextArea  ();
             }	
 
 
-public void Combo(String CourseNum) throws SQLException{
-    Connection conn ;
-    String query ;
-    conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");
-  try {
-            query = "SELECT * FROM SECTION  where REFRENCE_NUMBER = \'" + StudentMainWindow.lblInput1.getText()+"\'";          
-                   s = conn.createStatement ();
-                   r = s.executeQuery(query);
-                
-                while (StudentMainWindow.r.next()) {
-                elements.add(StudentMainWindow.r.getString(1));
-                 }
-                    
-                   /*
-                   for (int i = 0; i < elements.size(); i++) {
-                       String value = elements.get(i);
-                      // c1.addItem(value);}
-                   }
-                   */    
-                   strigs = new String[elements.size()];
-                   for (int i = 0; i < elements.size(); i++) {
-                       String value = elements.get(i);
-                       strigs[i]=value;
-                   }      
-               model = new DefaultComboBoxModel(strigs);  
-               c1  = new JComboBox(model);
-           }
 	
-            
-  
-            catch (Exception e){
-            } 
-  }	
 	
 	public static void main(String args []) throws SQLException 
 	{
