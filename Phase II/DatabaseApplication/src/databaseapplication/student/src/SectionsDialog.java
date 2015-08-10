@@ -38,10 +38,10 @@ JFrame f = new JFrame("The available sections");
     Connection conn ;
     String query ;
     conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");      
-      query = "SELECT * FROM SECTION  where REFRENCE_NUMBER = \'" + StudentMainWindow.lblInput1.getText()+"\'";   
-      String Rnum = "REFRENCE_NUMBER";
-        String Snum = "SECTION_NUMBER";
-        String Iid = "INSTRUCTOR_ID";
+         
+      String Rnum = "";
+        String Snum = "";
+        String Iid = "";
         f.setLayout(new FlowLayout());
         DefaultTableModel model = new DefaultTableModel();
         String[] columnNamess = {"REFRENCE_NUMBER","SECTION_NUMBER", "INSTRUCTOR_ID"};
@@ -57,7 +57,7 @@ JFrame f = new JFrame("The available sections");
         scroll.setVerticalScrollBarPolicy(
         JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     		
-      
+      query = "SELECT * FROM SECTION  where REFRENCE_NUMBER = \'" + StudentMainWindow.lblInput1.getText()+"\'";
       StudentMainWindow.s = conn.createStatement ();
       StudentMainWindow.r = StudentMainWindow.s.executeQuery(query);
        

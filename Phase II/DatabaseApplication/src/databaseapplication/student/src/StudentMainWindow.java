@@ -33,23 +33,23 @@ public class StudentMainWindow extends JFrame implements ActionListener
 JFrame f = new JFrame("The available sections");
 public static int height = 250;
 public static int width = 800;
-String StudentID = "2";
-String CourseNum ;
+int StudentID =1;
 
 JPanel pane1 = new JPanel();
 
 JPanel pane2 = new JPanel();
 JPanel pane3 = new JPanel();
-public static GetCurrentDate gd;
+public  GetCurrentDate gd;
 
 JLabel lb1 = new JLabel("Enter the course number:");
 JLabel lb2 = new JLabel("Enter the course number:");
 JLabel lb3 = new JLabel("Enter Your ID");
 JLabel lb4 = new JLabel();
 
-JButton b1 = new JButton("Get Sections");
+JButton b1 = new JButton("Register");
+JButton b22 = new JButton();
 JButton b12 = new JButton("View Courses");
-JButton b13 = new JButton("Register");
+JButton b13 = new JButton("Get Sections");
 JButton b2 = new JButton("Drop");
 JButton b3 = new JButton("View");
 
@@ -133,27 +133,30 @@ TextArea  lblOutput3 = new TextArea  ();
         
         try {
             conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");
-            if (ev.getSource() == b1){
-            new SectionsDialog();
+            if (ev.getSource() == b22){
+            
            
             }
+            else if (ev.getSource() == b1){ 
+            int ss =Integer.parseInt(lblInput1.getText());
+            query = "INSERT into ENROLLMENT (REG_DATE, STUDENT_ID, SECTION_REFRENCE_NUMBER) values ('2/2/2014','"+StudentID +"' ,'"+ss+"') ";           
+                   s = conn.createStatement();
+                   r = s.executeQuery(query);               
+            }    
             else if (ev.getSource() == b12){
              new StudentViewCoursesDialog();
               }
             else if (ev.getSource() == b13){
-            CourseNum=lblInput1.getText();
-           
             
-            query = "INSERT into ENROLLMENT values ('1/1/2010','1' ,'1') ";           
-                   s = conn.createStatement();
-                   r = s.executeQuery(query);
+           new SectionsDialog();
+
             
                }
             
             
             else if (ev.getSource() == b2){
-            
-            query = "DELETE from ENROLLMENT whrere STUDENT_ID = \'" + "1"+"\'";
+            int ss2 =Integer.parseInt(lblInput2.getText());
+            query = "DELETE from ENROLLMENT whrere SECTION_REFRENCE_NUMBER = \'" + lblInput1.getText()+"\'";
             
                    s = conn.createStatement ();
                    r = s.executeQuery(query);

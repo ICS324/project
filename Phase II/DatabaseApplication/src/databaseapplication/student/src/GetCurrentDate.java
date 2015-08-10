@@ -12,13 +12,12 @@
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class GetCurrentDate {
 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 Date date = new Date();
 public String getDate() {
- return dateFormat.format(date)+"";
+return dateFormat.format(date)+"";
 
   }
 }
