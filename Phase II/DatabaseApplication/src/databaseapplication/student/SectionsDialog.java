@@ -1,5 +1,7 @@
 
+package databaseapplication.student;
 
+import databaseapplication.SuperManager;
 import java.awt.BorderLayout;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -30,7 +32,7 @@ JFrame f = new JFrame("The available sections");
     public SectionsDialog() throws SQLException  {
     Connection conn ;
     String query ;
-    conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");      
+    conn = SuperManager.getConnectionManager().getConnection();      
     String elements[]={"1","2","3","4","5"};  
     JComboBox cb=new JComboBox(elements);   
     cb.setBounds(50, 50,90,20);

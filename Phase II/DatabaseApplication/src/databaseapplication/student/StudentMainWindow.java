@@ -1,7 +1,8 @@
 
+package databaseapplication.student;
 
 
-
+import databaseapplication.SuperManager;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.TextArea;
@@ -30,7 +31,7 @@ import javax.swing.JPanel;
 
 public class StudentMainWindow extends JFrame implements ActionListener
 {
-JFrame f = new JFrame("The available sections");
+JFrame jFrame = new JFrame("The available sections");
 public static int height = 250;
 public static int width = 800;
 int StudentID =1;
@@ -66,8 +67,8 @@ TextArea  lblOutput2 = new TextArea  ();
 TextArea  lblOutput3 = new TextArea  ();
 
 
-	  protected static String connStr ;
-	  protected static Connection conn ;
+	//  protected static String connStr ;
+	  static Connection conn ;
 	  protected String query ;
           protected String query2 ;
           protected String query3 ;
@@ -78,11 +79,13 @@ TextArea  lblOutput3 = new TextArea  ();
            
 	  public StudentMainWindow() throws SQLException
   {
-    super("Student Main Window");
-    f.setSize(width,height);
+      super("Student Main Window");
+      conn = SuperManager.getConnectionManager().getConnection();
     
-    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    f.setLayout(new FlowLayout());
+    jFrame.setSize(width,height);
+    
+    jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    jFrame.setLayout(new FlowLayout());
     pane1.setLayout(new GridLayout(0, 4));
     pane1.add(lb1);
     pane1.add(lblInput1);
@@ -96,7 +99,7 @@ TextArea  lblOutput3 = new TextArea  ();
     //pane1.add(c1);
     pane1.setBorder(new javax.swing.border.TitledBorder("Registering courses"));
     
-    f.add(pane1);
+    jFrame.add(pane1);
     
 
     
@@ -105,7 +108,7 @@ TextArea  lblOutput3 = new TextArea  ();
     pane2.add(b2);
     pane2.setBorder(new javax.swing.border.TitledBorder("Dropping courses"));
     
-   f.add(pane2);
+   jFrame.add(pane2);
     
     
    pane3.add(lb3);
@@ -113,11 +116,11 @@ TextArea  lblOutput3 = new TextArea  ();
     pane3.add(b3);
     pane3.setBorder(new javax.swing.border.TitledBorder("Viewing grades"));
     
-   f.add(pane3);
+   jFrame.add(pane3);
     
     
    
-    f.setVisible(true);
+    jFrame.setVisible(true);
     b1.addActionListener(this);
     b12.addActionListener(this);
     b1.addActionListener(this);
