@@ -10,9 +10,9 @@ ALTER TABLE College ADD CONSTRAINT College_PK PRIMARY KEY ( id ) ;
 
 CREATE TABLE Course
   (
-    "number"   NUMBER(4) NOT NULL ,
+    "number"   numeric(4) NOT NULL ,
     title      VARCHAR (50),
-    "level"    NUMBER(3) ,
+    "level"    numeric(3) ,
     Major_code VARCHAR (4)NOT NULL
   ) ;
 ALTER TABLE Course ADD CONSTRAINT Course_PK PRIMARY KEY ( "number" ) ;
@@ -30,27 +30,27 @@ ALTER TABLE Department ADD CONSTRAINT Department_PK PRIMARY KEY ( id ) ;
 CREATE TABLE Enrollment
   (
     reg_date                DATE ,
-    Student_id              NUMBER(9) NOT NULL ,
-    Section_refrence_number VARCHAR2 (20)NOT NULL
+    Student_id              numeric(9) NOT NULL ,
+    Section_refrence_number VARCHAR (20)NOT NULL
   ) ;
 ALTER TABLE Enrollment ADD CONSTRAINT Enrollment_PK PRIMARY KEY ( Student_id, Section_refrence_number ) ;
 
 
 CREATE TABLE Grading_Component
   (
-    id            NUMBER(3) NOT NULL ,
+    id            numeric(3) NOT NULL ,
     name          VARCHAR (15),
-    max_points    NUMBER(2) ,
-    weight        NUMBER(2) ,
-    Course_number NUMBER(4) NOT NULL ,
-    Instructor_id NUMBER(9) NOT NULL
+    max_points    numeric(2) ,
+    weight        numeric(2) ,
+    Course_number numeric(4) NOT NULL ,
+    Instructor_id numeric(9) NOT NULL
   ) ;
 ALTER TABLE Grading_Component ADD CONSTRAINT Grading_Component_PK PRIMARY KEY ( id ) ;
 
 
 CREATE TABLE Instructor
   (
-    id         NUMBER(9) NOT NULL ,
+    id         numeric(9) NOT NULL ,
     first_name VARCHAR(15),
     last_name  VARCHAR (15)
   ) ;
@@ -68,26 +68,26 @@ ALTER TABLE Major ADD CONSTRAINT Major_PK PRIMARY KEY ( code ) ;
 
 CREATE TABLE Point
   (
-    earned_Points              NUMBER(3) ,
-    Grading_Component_id       NUMBER(3) NOT NULL ,
-    Enrollment_Student_id      NUMBER(9) NOT NULL ,
+    earned_Points              numeric(3) ,
+    Grading_Component_id       numeric(3) NOT NULL ,
+    Enrollment_Student_id      numeric(9) NOT NULL ,
     Enrollment_refrence_number VARCHAR(20) NOT NULL
   ) ;
 
 
 CREATE TABLE Section
   (
-    refrence_number VARCHAR2 (20 CHAR) NOT NULL ,
-    "number"        NUMBER(2) ,
-    Instructor_id   NUMBER(9) NOT NULL ,
-    Course_number   NUMBER(4) NOT NULL
+    refrence_number VARCHAR (20) NOT NULL ,
+    "number"        numeric(2) ,
+    Instructor_id   numeric(9) NOT NULL ,
+    Course_number   numeric(4) NOT NULL
   ) ;
 ALTER TABLE Section ADD CONSTRAINT Section_PK PRIMARY KEY ( refrence_number ) ;
 
 
 CREATE TABLE Student
   (
-    id         NUMBER(9) NOT NULL ,
+    id         numeric(9) NOT NULL ,
     first_name VARCHAR (15),
     last_name  VARCHAR (15),
     Major_code VARCHAR (4)NOT NULL
