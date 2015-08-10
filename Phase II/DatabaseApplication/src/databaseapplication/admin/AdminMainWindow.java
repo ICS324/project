@@ -5,9 +5,16 @@
  */
 package databaseapplication.admin;
 
+import databaseapplication.admin.dialogs.DepartmentDialog;
+import databaseapplication.admin.dialogs.StudentDialog;
+import databaseapplication.admin.dialogs.AddCourseDialog;
+import databaseapplication.admin.dialogs.InstructorDialog;
 import Frameworks.OperationResult;
 import Frameworks.table.RowData;
 import databaseapplication.SuperManager;
+import databaseapplication.admin.dialogs.CollegeDialog;
+import databaseapplication.admin.dialogs.MajorDialog;
+import databaseapplication.admin.dialogs.SectionDialog;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -86,9 +93,124 @@ public class AdminMainWindow extends JFrame{
             else if(dbTable.getSlectedTableName().compareToIgnoreCase("instructor") == 0){
                 showInstructorDialog();
             }
+            else if(dbTable.getSlectedTableName().compareToIgnoreCase("college") == 0){
+                showAddCollegeDialog();
+            }
+            else if(dbTable.getSlectedTableName().compareToIgnoreCase("course") == 0){
+                showAddCourseDialog();
+            }
+            else if(dbTable.getSlectedTableName().compareToIgnoreCase("department") == 0){
+                showDepartmentDialog();
+            }
+            else if(dbTable.getSlectedTableName().compareToIgnoreCase("major") == 0){
+                showAddMajorDialog();
+            }
+            else if(dbTable.getSlectedTableName().compareToIgnoreCase("section") == 0){
+                showAddSectionDialog();
+            }
             else{
                 JOptionPane.showMessageDialog(Parent, "You are not allowed to modify this table!", "Info", JOptionPane.INFORMATION_MESSAGE);
             }
+        }
+        private void showAddSectionDialog(){
+            SectionDialog dialog = new SectionDialog(this.Parent);
+            
+            dialog.setVisible(true);
+        }
+        private void showAddMajorDialog(){
+            final MajorDialog dialog = new MajorDialog(this.Parent);
+            dialog.addOkButtonClickEvent(new ActionListener(){
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                    String majorName = dialog.getMajorName(); 
+                    String majorId = dialog.getMajorID();
+                    String department = dialog.getDepartment();
+                    OperationResult result = SuperManager.insert("major", "'"+majorName+"','"+majorId+"','"+department+"'");
+                    if(result.getResult()){
+                        JOptionPane.showMessageDialog(Parent, "New record was inserted!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                        dialog.setVisible(false);
+                        dialog.dispose();
+                        dbTable.selectData("major");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(Parent, result.getMessage(), "Info", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                });
+                dialog.setVisible(true);
+        }
+        private void showAddCollegeDialog(){
+            final CollegeDialog dialog = new CollegeDialog(this.Parent);
+            dialog.addOkButtonClickEvent(new ActionListener(){
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                    String collName = dialog.getCollegeName(); 
+                    String collId = dialog.getCollegeID();
+                    String collAbbrev = dialog.getAbbreviation();
+                    OperationResult result = SuperManager.insert("college", "'"+collId+"','"+collName+"','"+collAbbrev+"'");
+                    if(result.getResult()){
+                        JOptionPane.showMessageDialog(Parent, "New record was inserted!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                        dialog.setVisible(false);
+                        dialog.dispose();
+                        dbTable.selectData("department");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(Parent, result.getMessage(), "Info", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                });
+                dialog.setVisible(true);
+        }
+        private void showDepartmentDialog(){
+            final DepartmentDialog dialog = new DepartmentDialog(this.Parent);
+            dialog.addOkButtonClickEvent(new ActionListener(){
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                    String depName = dialog.getDepartmentName(); 
+                    String depId = dialog.getDepartmentID();
+                    String depAbbrev = dialog.getAbbreviation();
+                    String collegeId = dialog.getCollegeID();
+                    OperationResult result = SuperManager.insert("department", "'"+depId+"','"+depName+"','"+depAbbrev+"','"+collegeId+"'");
+                    if(result.getResult()){
+                        JOptionPane.showMessageDialog(Parent, "New record was inserted!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                        dialog.setVisible(false);
+                        dialog.dispose();
+                        dbTable.selectData("department");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(Parent, result.getMessage(), "Info", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                });
+                dialog.setVisible(true);
+        }
+        private void showAddCourseDialog(){
+            int lastRowNum = dbTable.rows();
+                final AddCourseDialog dialog = new AddCourseDialog(this.Parent,lastRowNum);
+                dialog.addOkButtonClickEvent(new ActionListener(){
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                    String courseTitle = dialog.getCourseTitle(); 
+                    String courseNum = dialog.getNumber();
+                    String courseLevel = dialog.getCourseLevel();
+                    String major = dialog.getMajor();
+                    OperationResult result = SuperManager.insert("course", ""+courseNum+",'"+courseTitle+"',"+courseLevel+",'"+major+"'");
+                    if(result.getResult()){
+                        JOptionPane.showMessageDialog(Parent, "New record was inserted!", "Info", JOptionPane.INFORMATION_MESSAGE);
+                        dialog.setVisible(false);
+                        dialog.dispose();
+                        dbTable.selectData("course");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(Parent, result.getMessage(), "Info", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                });
+                dialog.setVisible(true);
         }
         private void showInstructorDialog(){
             final InstructorDialog dialog = new InstructorDialog(this.Parent);

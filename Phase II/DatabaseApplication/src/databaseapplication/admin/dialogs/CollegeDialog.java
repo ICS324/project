@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package databaseapplication.admin;
+package databaseapplication.admin.dialogs;
 
 import Frameworks.UI.LabeledInputMethod;
 import Frameworks.UI.MyComboBox;
@@ -33,9 +33,9 @@ public class CollegeDialog extends AddEditDialog{
         }
     }
     private void init(){
-        this.collegeID = new LabeledInputMethod("Student ID:");
-        this.collegeName = new LabeledInputMethod("First Name:");
-        this.collegeAbbriv = new LabeledInputMethod("Last Name");
+        this.collegeID = new LabeledInputMethod("College ID:");
+        this.collegeName = new LabeledInputMethod("Name:");
+        this.collegeAbbriv = new LabeledInputMethod("Abbreiation");
         
         MyComboBox box = new MyComboBox();
         char c = 'A';

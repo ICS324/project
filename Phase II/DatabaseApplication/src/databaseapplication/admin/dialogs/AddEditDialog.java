@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package databaseapplication.admin;
+package databaseapplication.admin.dialogs;
 
 import Frameworks.UI.LabeledInputMethod;
 import Frameworks.UI.OkCancelPanel;
@@ -24,9 +24,8 @@ public class AddEditDialog extends JDialog{
     private OkCancelPanel okCancelPanel;
     private JPanel inputMethodContainer;
     private LinkedList<LabeledInputMethod> inputMethods;
-    private JFrame parent;
     public AddEditDialog(JFrame parent){
-        this.parent = parent;
+        super(parent,true);
         init();
         buildUI();
     }
@@ -48,7 +47,7 @@ public class AddEditDialog extends JDialog{
         super.add("South",this.okCancelPanel);
         super.add("Center",this.inputMethodContainer);
         super.setSize(300, 200);
-        super.setLocationRelativeTo(this.parent);
+        super.setLocationRelativeTo(super.getParent());
     }
 
     private void inputMethodsChanged(){

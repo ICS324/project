@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package databaseapplication.admin;
+package databaseapplication.admin.dialogs;
 
+import databaseapplication.admin.dialogs.AddEditDialog;
 import Frameworks.UI.LabeledInputMethod;
 import Frameworks.UI.MyComboBox;
 import Frameworks.UI.MyTextField;
 import Frameworks.table.RowData;
+import Frameworks.table.TableData;
+import databaseapplication.SuperManager;
 import javax.swing.JFrame;
 
 /**
@@ -31,10 +34,26 @@ public class DepartmentDialog extends AddEditDialog{
             this.collegeID.setValue((String)toEdit.get(3));
         }
     }
+    private void setForignKeyInputMethod(){
+        TableData keys = SuperManager.getConnectionManager().getForeignKeys();
+        for(int i = 0 ; i < keys.rows() ; i++){
+            String tableName = (String)keys.get(i, 0);
+            if(tableName.compareToIgnoreCase("department") == 0){
+                String refTable = (String)keys.get(i, 2);
+                String refColumn = (String)keys.get(i, 3);
+                TableData keysValues = SuperManager.getConnectionManager().getResultSetAsTable("select "+refColumn+" from "+refTable);
+                MyComboBox comboBox = new MyComboBox();
+                for(int j = 0 ; j < keysValues.rows() ; j++){
+                    comboBox.addItem((String)keysValues.get(j, 0));
+                }
+                this.collegeID.setInputMethod(comboBox);
+            }
+        }
+    }
     private void init(){
-        this.depID = new LabeledInputMethod("Student ID:");
-        this.deptName = new LabeledInputMethod("First Name:");
-        this.depAbbev = new LabeledInputMethod("Last Name");
+        this.depID = new LabeledInputMethod("Department ID:");
+        this.deptName = new LabeledInputMethod("Name:");
+        this.depAbbev = new LabeledInputMethod("Abbreiation: ");
         this.collegeID = new LabeledInputMethod("College: ");
         
         MyComboBox box = new MyComboBox();
@@ -46,6 +65,7 @@ public class DepartmentDialog extends AddEditDialog{
         this.depID.setInputMethod(box);
         this.deptName.setInputMethod(new MyTextField());
         this.depAbbev.setInputMethod(new MyTextField());
+        setForignKeyInputMethod();
     }
 
     
@@ -53,18 +73,23 @@ public class DepartmentDialog extends AddEditDialog{
         super.addLabeledInputMethod(depID);
         super.addLabeledInputMethod(this.deptName);
         super.addLabeledInputMethod(this.depAbbev);
+        super.addLabeledInputMethod(this.collegeID);
 
     }
-    public String getCollegeID(){
+    public String getDepartmentID(){
         return this.depID.getValue();
     }
     
-    public String getCollegeName(){
+    public String getDepartmentName(){
         return this.deptName.getValue();
     }
 
     public String getAbbreviation(){
         return this.depAbbev.getValue();
+    }
+
+    public String getCollegeID() {
+        return this.collegeID.getValue();
     }
 
 }
