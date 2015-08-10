@@ -27,8 +27,8 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>11 CHAR</dataTypeSize>
-<ownDataTypeParameters>11 CHAR,,</ownDataTypeParameters>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="number" id="961F11A7-6EB0-2F2F-196A-58B386BA5670">
 <createdBy>Ibrahim</createdBy>
@@ -93,7 +93,6 @@
 <pk>true</pk>
 <usedAttributes>
 <attributeRef>24CC20F0-4F6B-CFE4-C34B-565776531F86</attributeRef>
-<attributeRef>45B1CE25-5C6D-1152-C0E5-AD082B051795</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>
