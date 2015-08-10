@@ -6,11 +6,8 @@
 package databaseapplication.instructor;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 import javax.swing.JFrame;
-import javax.swing.JTable;
 
 import databaseapplication.CommonMethods;
 import java.awt.Color;
@@ -39,18 +36,7 @@ static CommonMethods cm;
             cm = new CommonMethods();
             con = cm.getConnection();
 
-                
-                /*
-	  	 * TODO delete grade cutoffs ?maybe?
-	  	 * TODO assign grading componenets 
-	  	 
-	     *	grading components
-	     *		insert into grading_component values ('2', 'Midterm', '25', '25', '1234', '1')
-	     *				
-	     *	grading cutoffs
-	     *		delete from grading_cutoffs where sec_ref_num = 1231 and value = 98
-	     
-	     */		
+	
 		JFrame f = new JFrame();
 		f.setSize(525, 275);
 		f.setLayout(new GridLayout(4,0));

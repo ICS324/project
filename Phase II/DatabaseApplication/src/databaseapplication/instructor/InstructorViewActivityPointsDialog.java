@@ -42,7 +42,7 @@ public class InstructorViewActivityPointsDialog extends JFrame {
                                     "select Student.id, CONCAT(CONCAT(first_name, ' '), last_name) name,POINT.EARNED_POINTS EARNED from STUDENT join POINT join GRADING_COMPONENT on(POINT.GRADING_COMPONENT_ID=GRADING_COMPONENT.ID) on (STUDENT.ID = POINT.ENROLLMENT_STUDENT_ID) where GRADING_COMPONENT.ID = "+activity+" order by POINT.GRADING_COMPONENT_ID asc");
                     p.add(t);
 
-                    ResultSet r = con.createStatement().executeQuery("select avg(POINT.EARNED_POINTS) Average from STUDENT join POINT join GRADING_COMPONENT on(POINT.GRADING_COMPONENT_ID=GRADING_COMPONENT.ID) on (STUDENT.ID = POINT.ENROLLMENT_STUDENT_ID) where GRADING_COMPONENT.ID = 1 ");
+                    ResultSet r = con.createStatement().executeQuery("select avg(POINT.EARNED_POINTS) Average from STUDENT join POINT join GRADING_COMPONENT on(POINT.GRADING_COMPONENT_ID=GRADING_COMPONENT.ID) on (STUDENT.ID = POINT.ENROLLMENT_STUDENT_ID) where GRADING_COMPONENT.ID ="+activity+" ");
                     r.next();
                     JTextField text = new JTextField("the average is " + r.getString(1));
                     text.setEditable(false);

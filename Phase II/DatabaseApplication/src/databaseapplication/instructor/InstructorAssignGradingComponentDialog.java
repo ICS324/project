@@ -33,8 +33,8 @@ private JTable table;
 		final CommonMethods cm = Main.cm;
                 final Connection con = Main.con;
 		
-                final String course = cm.getFrom(cm, con
-         	   	    ,"select \"number\",title from course where \"number\" in (select distinct floor(REFRENCE_NUMBER/10) from section where INSTRUCTOR_ID = "+Main.instructorID+")"
+                final String course = cm.getFrom(cm, con//To Edit Substring
+         	   	 ,"select \"number\",title from course where \"number\" in (select distinct SUBSTR(REFRENCE_NUMBER,0,3) from section where INSTRUCTOR_ID = "+Main.instructorID+")"
             	   	 ,"there is no section assigned to instructor "+Main.instructorID
                		 ,"select a section");
                 if(course ==null)
