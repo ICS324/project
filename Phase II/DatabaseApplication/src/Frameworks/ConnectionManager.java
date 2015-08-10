@@ -139,7 +139,7 @@ public final class ConnectionManager implements DatabaseManager{
 		String message = "done";
                 try{
                     Statement s = this.connection.createStatement();
-                    this.resultSet = s.executeQuery(url);
+                    this.resultSet = s.executeQuery(query);
                     return new OperationResult(true,message);
                 }
                 catch(Exception ex){

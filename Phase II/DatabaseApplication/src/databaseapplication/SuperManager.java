@@ -10,7 +10,7 @@ import Frameworks.OperationResult;
 import Frameworks.table.TableData;
 import databaseapplication.admin.AdminMainWindow;
 import databaseapplication.instructor.PackageMainInterface;
-import databaseapplication.student.StudentMainWindow;
+//import databaseapplication.student.StudentMainWindow;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

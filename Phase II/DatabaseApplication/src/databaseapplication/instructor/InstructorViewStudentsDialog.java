@@ -1,5 +1,7 @@
 package databaseapplication.instructor;
 
+import Frameworks.UI.DataTable;
+import Frameworks.table.TableData;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,37 +14,42 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import databaseapplication.CommonMethods;
+import databaseapplication.SuperManager;
 
 public class InstructorViewStudentsDialog extends JFrame{
 	
-	private JTable t;
-
+	//private JTable jTable;
+        private DataTable table;
+        
 	InstructorViewStudentsDialog(){
+            this.table = new DataTable();
             CommonMethods cm = PackageMainInterface.cm;
             Connection con = PackageMainInterface.con;
             String section = cm.getFrom(cm, con
-            			,"select REFRENCE_NUMBER from section where INSTRUCTOR_ID = "+PackageMainInterface.instructorID
+            			,"select REFRENCE_NUMBER from section where instructor_id = "+PackageMainInterface.instructorID
             			,"there is no section taught by instructor "+PackageMainInterface.instructorID
             			,"select a section");
             if(section==null)
                 return;
 
             setLayout(new BorderLayout());
-            JTextField f = new JTextField("the list of students");
-            f.setBackground(Color.LIGHT_GRAY);
-            f.setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
-            f.setEditable(false);
-            add(f,BorderLayout.NORTH);
-            ScrollPane p = new ScrollPane();
-            t = cm.CreateTable(con,
-                    "select student_id,concat(concat(first_name,' '),last_name) as name from enrollment join student on (student_id = id) where SECTION_REFRENCE_NUMBER = "+section+" order by student_id");
-            p.add(t);
-            add(p,BorderLayout.CENTER);
-            setSize((int) (t.getPreferredSize().width*1.25 +50 ),t.getPreferredSize().height*2 +50);
+            JTextField textField = new JTextField("the list of students");
+            textField.setBackground(Color.LIGHT_GRAY);
+            textField.setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
+            textField.setEditable(false);
+            add(textField,BorderLayout.NORTH);
+            
+           // ScrollPane p = new ScrollPane();
+            TableData data  = SuperManager.getConnectionManager().getResultSetAsTable(
+                    "select student_id, first_name, last_name from student join enrollment on (student.id = enrollment.student_id and enrollment.SECTION_REFRENCE_NUMBER = '"+section+"')");
+           // p.add(jTable);
+            this.table.updateData(data);
+            super.add(this.table,BorderLayout.CENTER);
+            super.setSize((int) (this.table.getPreferredSize().width*1.25 +50 ),this.table.getPreferredSize().height*2 +50);
 
-            Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-            setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
-            setResizable(false);
-            setVisible(true);
+            //Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+            super.setLocationRelativeTo(null);
+            super.setResizable(false);
+            super.setVisible(true);
 	}
 }

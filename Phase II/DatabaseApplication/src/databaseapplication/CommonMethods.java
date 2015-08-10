@@ -1,5 +1,6 @@
 package databaseapplication;
 
+import Frameworks.OperationResult;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Connection;
@@ -101,18 +102,21 @@ public class CommonMethods {
 		String selection;
 		ArrayList<String> choices = null;
 		try {
-		    SuperManager.executeQuery(query);
+		    OperationResult o = SuperManager.executeQuery(query);
                     ResultSet r = SuperManager.getResultSet();
-		    if(!r.next()){
-		        JOptionPane.showMessageDialog(null,msg);
+                    System.out.println(query);
+		    if(!o.getResult()){
+		        JOptionPane.showMessageDialog(null,o.getMessage());
 		        return null;
 		    }
-		    choices = new ArrayList<String>();
-		    do{
-		        choices.add(r.getString(1));
-		    }while(r.next());
+                    choices = new ArrayList<>();
+                    while(r.next()){
+                        choices.add(r.getString(1));
+                        System.out.println(r.getString(1));
+                    }
+		    
 
-		} catch (SQLException e){}
+		} catch (SQLException e){System.out.println(e);}
 
 		selection = cm.Combo(choices.toArray(), choose);
 		return selection;
