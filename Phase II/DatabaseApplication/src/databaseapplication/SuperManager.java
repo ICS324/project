@@ -10,6 +10,7 @@ import Frameworks.OperationResult;
 import Frameworks.table.TableData;
 import databaseapplication.admin.AdminMainWindow;
 import databaseapplication.instructor.PackageMainInterface;
+import databaseapplication.student.StudentMainWindow;
 //import databaseapplication.student.StudentMainWindow;
 
 import java.sql.ResultSet;
@@ -39,7 +40,10 @@ public class SuperManager {
             new AdminMainWindow();
         }
         else if(userType.compareToIgnoreCase("student") == 0){
-            
+            try{
+                new StudentMainWindow(password_);
+            }
+            catch(Exception Ex){}
         }
         else if(userType.compareToIgnoreCase("instructor") == 0){
             PackageMainInterface.runInstructorUI(password_);

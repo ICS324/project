@@ -55,7 +55,7 @@ JFrame f = new JFrame("The available sections");
         scroll.setVerticalScrollBarPolicy(
         JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     		
-      query = "SELECT * FROM SECTION  where REFRENCE_NUMBER = \'" + StudentMainWindow.lblInput1.getText()+"\'";
+      query = "SELECT * FROM SECTION  where REFRENCE_NUMBER = \'" + StudentMainWindow.secRefNumInput.getText()+"\'";
       StudentMainWindow.s = conn.createStatement ();
       StudentMainWindow.r = StudentMainWindow.s.executeQuery(query);
        
