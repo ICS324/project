@@ -1,15 +1,15 @@
+package databaseapplication.student;
+
+
+
+
 
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Vector;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -29,22 +29,26 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author aqeil54
  */
-public class SectionsDialog extends JDialog {
-JFrame f = new JFrame("The available sections");
+public class StudentsGradesDialog extends JDialog {
+JFrame f = new JFrame("The available courses");
+    public StudentsGradesDialog() throws SQLException  {
+    
 
-
-
-    public SectionsDialog() throws SQLException  {
     Connection conn ;
     String query ;
-    conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");      
-         
-      String Rnum = "";
-        String Snum = "";
-        String Iid = "";
-        f.setLayout(new FlowLayout());
+    conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");
+  
+    
+    
+    f.setLayout(new FlowLayout());
+
+ 
+
+        String EARNED_POINTS = "";
+   
+        f.setLayout(new BorderLayout());
         DefaultTableModel model = new DefaultTableModel();
-        String[] columnNamess = {"REFRENCE_NUMBER","SECTION_NUMBER", "INSTRUCTOR_ID"};
+        String[] columnNamess = {"EARNED_POINTS"};
         model.setColumnIdentifiers(columnNamess);
         JTable table = new JTable(model);
         table = new JTable();
@@ -56,19 +60,16 @@ JFrame f = new JFrame("The available sections");
         JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroll.setVerticalScrollBarPolicy(
         JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-    		
-      query = "SELECT * FROM SECTION  where REFRENCE_NUMBER = \'" + StudentMainWindow.lblInput1.getText()+"\'";
-      StudentMainWindow.s = conn.createStatement ();
-      StudentMainWindow.r = StudentMainWindow.s.executeQuery(query);
+		query = "SELECT EARNED_POINTS FROM POINT where ENROLLMENT_STUDENT_ID = \'" + StudentMainWindow.lblInput3.getText()+"\'";
+		  StudentMainWindow.s = conn.createStatement ();
+		  StudentMainWindow.r = StudentMainWindow.s.executeQuery(query);
        
             try{
             int i = 0;
             
             while (StudentMainWindow.r.next()) {
-                Rnum = StudentMainWindow.r.getString("REFRENCE_NUMBER");
-                Snum = StudentMainWindow.r.getString("SECTION_NUMBER");
-                Iid = StudentMainWindow.r.getString("INSTRUCTOR_ID");
-                model.addRow(new Object[]{Rnum, Snum, Iid});
+                EARNED_POINTS = StudentMainWindow.r.getString("EARNED_POINTS");
+                model.addRow(new Object[]{EARNED_POINTS});
                 i++;
             }
             if (i < 1) {
@@ -84,19 +85,17 @@ JFrame f = new JFrame("The available sections");
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
        
-     f.add(scroll);  
-    f.setSize(500, 500);
+    f.add(scroll);
+    f.setSize(400, 200);
     f.setResizable(false);
     f.setVisible(true);
     
-     
 
-                
+
+  }
+
     
-
-    }
- 
-    }
+}
 
    
 

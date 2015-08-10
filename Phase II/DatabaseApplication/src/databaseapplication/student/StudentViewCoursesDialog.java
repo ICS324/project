@@ -1,3 +1,5 @@
+package databaseapplication.student;
+
 
 
 
@@ -27,14 +29,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author aqeil54
  */
-public class StudentsGradesDialog extends JDialog {
+public class StudentViewCoursesDialog extends JDialog {
 JFrame f = new JFrame("The available courses");
-    public StudentsGradesDialog() throws SQLException  {
+    public StudentViewCoursesDialog() throws SQLException  {
     
 
     Connection conn ;
     String query ;
-    conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");
+    conn = StudentMainWindow.conn;//DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");
   
     
     
@@ -42,11 +44,15 @@ JFrame f = new JFrame("The available courses");
 
  
 
-        String EARNED_POINTS = "";
+        String courseNum = "";
+        String title = "";
+        String level = "";
+        String MagCod = "";
+
    
         f.setLayout(new BorderLayout());
         DefaultTableModel model = new DefaultTableModel();
-        String[] columnNamess = {"EARNED_POINTS"};
+        String[] columnNamess = {"Course Number", "Title", "Level", "MAJOR_CODE"};
         model.setColumnIdentifiers(columnNamess);
         JTable table = new JTable(model);
         table = new JTable();
@@ -58,7 +64,8 @@ JFrame f = new JFrame("The available courses");
         JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroll.setVerticalScrollBarPolicy(
         JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		query = "SELECT EARNED_POINTS FROM POINT where ENROLLMENT_STUDENT_ID = \'" + StudentMainWindow.lblInput3.getText()+"\'";
+    		
+		query = "SELECT * FROM COURSE";
 		  StudentMainWindow.s = conn.createStatement ();
 		  StudentMainWindow.r = StudentMainWindow.s.executeQuery(query);
        
@@ -66,8 +73,11 @@ JFrame f = new JFrame("The available courses");
             int i = 0;
             
             while (StudentMainWindow.r.next()) {
-                EARNED_POINTS = StudentMainWindow.r.getString("EARNED_POINTS");
-                model.addRow(new Object[]{EARNED_POINTS});
+                courseNum = StudentMainWindow.r.getString("number");
+                title = StudentMainWindow.r.getString("TITLE");
+                level = StudentMainWindow.r.getString("level");
+                MagCod = StudentMainWindow.r.getString("MAJOR_CODE");
+                model.addRow(new Object[]{courseNum, title, level, MagCod});
                 i++;
             }
             if (i < 1) {
@@ -84,7 +94,7 @@ JFrame f = new JFrame("The available courses");
         }
        
     f.add(scroll);
-    f.setSize(400, 200);
+    f.setSize(400, 300);
     f.setResizable(false);
     f.setVisible(true);
     

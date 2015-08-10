@@ -1,7 +1,11 @@
+package databaseapplication.student;
 
 
 
 
+
+
+import databaseapplication.CommonMethods;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.TextArea;
@@ -132,7 +136,11 @@ TextArea  lblOutput3 = new TextArea  ();
 		
         
         try {
-            conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");
+            System.out.println("1");
+            
+            //conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620.");
+            conn = new CommonMethods().getConnection();
+            System.out.println("1");
             if (ev.getSource() == b22){
             
            

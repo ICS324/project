@@ -1,13 +1,19 @@
+package databaseapplication.student;
 
 
 
-
-
+import databaseapplication.CommonMethods;
+import databaseapplication.instructor.Main;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -27,30 +33,22 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author aqeil54
  */
-public class StudentViewCoursesDialog extends JDialog {
-JFrame f = new JFrame("The available courses");
-    public StudentViewCoursesDialog() throws SQLException  {
-    
+public class SectionsDialog extends JDialog {
+JFrame f = new JFrame("The available sections");
 
+
+
+    public SectionsDialog() throws SQLException  {
     Connection conn ;
     String query ;
-    conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");
-  
-    
-    
-    f.setLayout(new FlowLayout());
-
- 
-
-        String courseNum = "";
-        String title = "";
-        String level = "";
-        String MagCod = "";
-
-   
-        f.setLayout(new BorderLayout());
+    conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");      
+         
+      String Rnum = "";
+        String Snum = "";
+        String Iid = "";
+        f.setLayout(new FlowLayout());
         DefaultTableModel model = new DefaultTableModel();
-        String[] columnNamess = {"Course Number", "Title", "Level", "MAJOR_CODE"};
+        String[] columnNamess = {"REFRENCE_NUMBER","SECTION_NUMBER", "INSTRUCTOR_ID"};
         model.setColumnIdentifiers(columnNamess);
         JTable table = new JTable(model);
         table = new JTable();
@@ -63,19 +61,18 @@ JFrame f = new JFrame("The available courses");
         scroll.setVerticalScrollBarPolicy(
         JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     		
-		query = "SELECT * FROM COURSE";
-		  StudentMainWindow.s = conn.createStatement ();
-		  StudentMainWindow.r = StudentMainWindow.s.executeQuery(query);
+      query = "SELECT * FROM SECTION  where REFRENCE_NUMBER = \'" + StudentMainWindow.lblInput1.getText()+"\'";
+      StudentMainWindow.s = conn.createStatement ();
+      StudentMainWindow.r = StudentMainWindow.s.executeQuery(query);
        
             try{
             int i = 0;
             
             while (StudentMainWindow.r.next()) {
-                courseNum = StudentMainWindow.r.getString("number");
-                title = StudentMainWindow.r.getString("TITLE");
-                level = StudentMainWindow.r.getString("level");
-                MagCod = StudentMainWindow.r.getString("MAJOR_CODE");
-                model.addRow(new Object[]{courseNum, title, level, MagCod});
+                Rnum = StudentMainWindow.r.getString("REFRENCE_NUMBER");
+                Snum = StudentMainWindow.r.getString("SECTION_NUMBER");
+                Iid = StudentMainWindow.r.getString("INSTRUCTOR_ID");
+                model.addRow(new Object[]{Rnum, Snum, Iid});
                 i++;
             }
             if (i < 1) {
@@ -91,17 +88,31 @@ JFrame f = new JFrame("The available courses");
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
        
-    f.add(scroll);
-    f.setSize(400, 300);
+
+                CommonMethods cm = new CommonMethods();
+                //final Connection con = Main.con;
+		
+                final String course = cm.getFrom(cm, conn//To Edit Substring
+         	   	 ,"select REFRENCE_NUMBER from section"
+            	   	 ,"there is no section assigned to instructor "
+               		 ,"select a section");
+                if(course ==null)
+                    return;
+
+            
+     f.add(scroll);  
+    f.setSize(500, 500);
     f.setResizable(false);
     f.setVisible(true);
     
+     
 
-
-  }
-
+                
     
-}
+
+    }
+ 
+    }
 
    
 
