@@ -1,11 +1,7 @@
-package databaseapplication.student;
 
 
 
 
-
-
-import databaseapplication.CommonMethods;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.TextArea;
@@ -136,27 +132,18 @@ TextArea  lblOutput3 = new TextArea  ();
 		
         
         try {
-            System.out.println("1");
-            
-            //conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","ibra5him","1415620.");
-            conn = new CommonMethods().getConnection();
-            System.out.println("1");
-            if (ev.getSource() == b22){
-            
-           
-            }
-            else if (ev.getSource() == b1){ 
+
+             if (ev.getSource() == b1){ 
             int ss =Integer.parseInt(lblInput1.getText());
             query = "INSERT into ENROLLMENT (REG_DATE, STUDENT_ID, SECTION_REFRENCE_NUMBER) values ('2/2/2014','"+StudentID +"' ,'"+ss+"') ";           
                    s = conn.createStatement();
                    r = s.executeQuery(query);               
             }    
             else if (ev.getSource() == b12){
-             new StudentViewCoursesDialog();
+           new StudentViewCoursesDialog();
               }
             else if (ev.getSource() == b13){
-            
-           new SectionsDialog();
+            new SectionsDialog();
 
             
                }
@@ -164,7 +151,7 @@ TextArea  lblOutput3 = new TextArea  ();
             
             else if (ev.getSource() == b2){
             int ss2 =Integer.parseInt(lblInput2.getText());
-            query = "DELETE from ENROLLMENT whrere SECTION_REFRENCE_NUMBER = \'" + lblInput1.getText()+"\'";
+            query = "DELETE from ENROLLMENT where SECTION_REFRENCE_NUMBER = \'" + ss2+"\'";
             
                    s = conn.createStatement ();
                    r = s.executeQuery(query);

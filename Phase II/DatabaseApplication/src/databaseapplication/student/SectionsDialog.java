@@ -1,24 +1,13 @@
-package databaseapplication.student;
 
 
-
-import databaseapplication.CommonMethods;
-import databaseapplication.instructor.Main;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Vector;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -42,11 +31,14 @@ JFrame f = new JFrame("The available sections");
     Connection conn ;
     String query ;
     conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","201236760");      
-         
+    String elements[]={"1","2","3","4","5"};  
+    JComboBox cb=new JComboBox(elements);   
+    cb.setBounds(50, 50,90,20);
+    f.add(cb);
       String Rnum = "";
         String Snum = "";
         String Iid = "";
-        f.setLayout(new FlowLayout());
+        f.setLayout(new BorderLayout());
         DefaultTableModel model = new DefaultTableModel();
         String[] columnNamess = {"REFRENCE_NUMBER","SECTION_NUMBER", "INSTRUCTOR_ID"};
         model.setColumnIdentifiers(columnNamess);
@@ -87,20 +79,8 @@ JFrame f = new JFrame("The available sections");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-       
-
-                CommonMethods cm = new CommonMethods();
-                //final Connection con = Main.con;
-		
-                final String course = cm.getFrom(cm, conn//To Edit Substring
-         	   	 ,"select REFRENCE_NUMBER from section"
-            	   	 ,"there is no section assigned to instructor "
-               		 ,"select a section");
-                if(course ==null)
-                    return;
-
-            
-     f.add(scroll);  
+    f.add(cb);  
+    f.add(scroll);  
     f.setSize(500, 500);
     f.setResizable(false);
     f.setVisible(true);
@@ -111,7 +91,10 @@ JFrame f = new JFrame("The available sections");
     
 
     }
- 
+
+
+    
+
     }
 
    
